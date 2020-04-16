@@ -6,4 +6,10 @@
     <string name="invalid_email_toast">Please Enter Valid Email!</string>
     <string name="authenticated">Authenticated</string>
     <string name="logout_title">Logout</string>
+    <string name="user_name_title">User Name</string>
+    <string name="phone_number_title">Phone Number</string>
+    <string name="vitian_title">Are you a Vitian?</string>
+    <string name="submit_title">Submit</string>
+    <string name="reg_number_title">Registration Number</string>
+    <string name="room_number_title">Room Number</string>
 </resources>
