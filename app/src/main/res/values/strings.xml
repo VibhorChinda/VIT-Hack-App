@@ -12,4 +12,5 @@
     <string name="submit_title">Submit</string>
     <string name="reg_number_title">Registration Number</string>
     <string name="room_number_title">Room Number</string>
+    <string name="enter_details">Enter all the text fields</string>
 </resources>
