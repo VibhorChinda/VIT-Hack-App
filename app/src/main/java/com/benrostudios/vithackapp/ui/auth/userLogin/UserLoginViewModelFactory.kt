@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.userLogin
+package com.benrostudios.vithackapp.ui.auth.userLogin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.authenticatedLogin
+package com.benrostudios.vithackapp.ui.auth.authenticatedLogin
 
 import android.app.Activity
 import androidx.lifecycle.ViewModelProviders
@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.benrostudios.vithackapp.R
-import com.benrostudios.vithackapp.ui.userLogin.UserLogin
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.authenticated_user_fragment.*
 
 class AuthenticatedUser : Fragment() {
@@ -20,13 +18,10 @@ class AuthenticatedUser : Fragment() {
         fun switchToLogin()
     }
 
-
     companion object {
         fun newInstance() = AuthenticatedUser()
     }
-
     private lateinit var viewModel: AuthenticatedUserViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +39,6 @@ class AuthenticatedUser : Fragment() {
             )
         }
     }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AuthenticatedUserViewModel::class.java)

@@ -1,13 +1,11 @@
-package com.benrostudios.vithackapp.ui.userLogin
+package com.benrostudios.vithackapp.ui.auth.userLogin
 
-import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.benrostudios.vithackapp.data.repository.AuthRepository
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 class UserLoginViewModel(
     private val authRepository: AuthRepository

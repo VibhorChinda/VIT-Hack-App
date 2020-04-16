@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.base
+package com.benrostudios.vithackapp.ui.auth.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

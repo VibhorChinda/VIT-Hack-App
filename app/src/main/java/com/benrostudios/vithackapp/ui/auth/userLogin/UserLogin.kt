@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.userLogin
+package com.benrostudios.vithackapp.ui.auth.userLogin
 
 import android.app.Activity
 import android.content.Intent
@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
-import com.benrostudios.vithackapp.ui.MainActivity
-import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.auth.AuthActivity
+import com.benrostudios.vithackapp.ui.auth.base.ScopedFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -108,7 +108,7 @@ class UserLogin : ScopedFragment(), KodeinAware {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
-        googleSignInClient = GoogleSignIn.getClient(activity as MainActivity, googleSignInOptions)
+        googleSignInClient = GoogleSignIn.getClient(activity as AuthActivity, googleSignInOptions)
     }
 
     private fun signIn2() {
