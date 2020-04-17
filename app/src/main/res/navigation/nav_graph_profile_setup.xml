@@ -7,16 +7,28 @@
 
     <fragment
         android:id="@+id/generalDetailsForm"
-        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.generalDetails.GeneralDetailsForm"
+        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.GeneralDetailsFormFragment"
         android:label="general_details_form_fragment"
         tools:layout="@layout/general_details_form_fragment" >
         <action
             android:id="@+id/action_generalDetailsForm_to_vitDetailsForm"
             app:destination="@id/vitDetailsForm" />
+        <action
+            android:id="@+id/action_generalDetailsForm_to_companyDetailsFragment"
+            app:destination="@id/companyDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/vitDetailsForm"
-        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.vitDetails.VitDetailsForm"
+        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.VitDetailsFormFragment"
         android:label="vit_details_form_fragment"
-        tools:layout="@layout/vit_details_form_fragment" />
+        tools:layout="@layout/vit_details_form_fragment" >
+        <action
+            android:id="@+id/action_vitDetailsForm_to_companyDetailsFragment2"
+            app:destination="@id/companyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/companyDetailsFragment"
+        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.CompanyDetailsFragment"
+        android:label="fragment_company_details"
+        tools:layout="@layout/fragment_company_details" />
 </navigation>

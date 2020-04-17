@@ -1,8 +1,5 @@
 package com.benrostudios.vithackapp.data.models
 
-
-import com.google.gson.annotations.SerializedName
-
 data class User(
     val company: String,
     val fcmToken: String,
