@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 interface AuthRepository {
-    fun FirebaseCreateWithEmailPassword(email: String, password: String): LiveData<Boolean>
-    fun FirebaseSignInWithEmailPassword(email: String, password: String): LiveData<Boolean>
-    fun FirebaseCreateWithGoogle(acct: GoogleSignInAccount): LiveData<Boolean>
+    suspend fun firebaseCreateWithEmailPassword(email: String, password: String)
+    suspend fun firebaseSignInWithEmailPassword(email: String, password: String)
+    suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount)
+    fun getAuthStatus(): LiveData<Boolean>
 }

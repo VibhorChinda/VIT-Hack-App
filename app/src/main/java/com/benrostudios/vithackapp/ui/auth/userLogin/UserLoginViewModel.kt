@@ -1,6 +1,5 @@
 package com.benrostudios.vithackapp.ui.auth.userLogin
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,25 +11,24 @@ class UserLoginViewModel(
 ) : ViewModel() {
     private val response = MutableLiveData<Boolean>()
 
-    fun FirebaseCreateWithEmailPassword(email: String, password: String): LiveData<Boolean> {
-        authRepository.FirebaseCreateWithEmailPassword(email, password).observeForever {
+    suspend fun firebaseCreateWithEmailPassword(email: String, password: String) {
+        authRepository.firebaseCreateWithEmailPassword(email,password)
+    }
+
+
+    suspend fun firebaseSignInWithEmailPassword(email: String, password: String){
+        authRepository.firebaseSignInWithEmailPassword(email,password)
+    }
+
+    suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount) {
+       authRepository.firebaseCreateWithGoogle(acct)
+    }
+
+    fun getAuthStatus(): LiveData<Boolean>{
+        authRepository.getAuthStatus().observeForever {
             response.postValue(it)
-            Log.d("Login","ViewModel Says "+ it.toString())
         }
         return response
-    }
-
-    fun FirebaseSignInWithEmailPassword(email: String, password: String){
-        authRepository.FirebaseSignInWithEmailPassword(email, password).observeForever {
-            response.postValue(it)
-        }
-
-    }
-
-    fun FirebaseCreateWithGoogle(acct: GoogleSignInAccount) {
-        authRepository.FirebaseCreateWithGoogle(acct).observeForever {
-            response.postValue(it)
-        }
     }
 
 

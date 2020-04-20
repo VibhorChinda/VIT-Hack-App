@@ -14,6 +14,7 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.auth.base.ScopedFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -58,6 +59,7 @@ class UserLogin : ScopedFragment(), KodeinAware {
                         + " must implement TextClicked"
             )
         }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,37 +70,43 @@ class UserLogin : ScopedFragment(), KodeinAware {
         google_sign_in.setOnClickListener {
             googleSignIn()
         }
-        fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+        fun CharSequence?.isValidEmail() =
+            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
         //EmailPasswordButton
         login_button.setOnClickListener {
-            var email = email_input.text
-            if(email.isValidEmail()) {
-                FirebaseCreateWithEmailPassword(
+            val email = email_input.text
+            if (email.isValidEmail()) {
+                authListener()
+                firebaseCreateWithEmailPassword(
                     email.toString(),
                     password_input.text.toString()
                 )
-            }else{
-                Toast.makeText(activity,R.string.invalid_email_toast,Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(activity, R.string.invalid_email_toast, Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun FirebaseCreateWithEmailPassword(email: String , password:String)= launch{
-        viewModel.FirebaseCreateWithEmailPassword(email, password).observeForever {
+    private fun firebaseCreateWithEmailPassword(email: String, password: String) = launch {
+        viewModel.firebaseCreateWithEmailPassword(email, password)
+
+    }
+
+    private fun authListener() = launch {
+        viewModel.getAuthStatus().observeForever {
             if (it) {
                 Log.d("Login", "Success")
                 upadateUI()
             } else {
                 Log.d("Login", "Failure  from UserLogin")
-                Toast.makeText(activity,"Error",Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
             }
         }
-
     }
 
     private fun googleSignIn() {
         initGoogleSignInClient()
-        signIn2()
+        startGoogleSignUp()
 
     }
 
@@ -111,7 +119,7 @@ class UserLogin : ScopedFragment(), KodeinAware {
         googleSignInClient = GoogleSignIn.getClient(activity as AuthActivity, googleSignInOptions)
     }
 
-    private fun signIn2() {
+    private fun startGoogleSignUp() {
         val signInIntent: Intent = googleSignInClient.getSignInIntent()
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -124,8 +132,7 @@ class UserLogin : ScopedFragment(), KodeinAware {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
-                viewModel.FirebaseCreateWithGoogle(account!!)
-                upadateUI()
+                signUpwithGoogle(account!!)
             } catch (e: ApiException) {
                 Log.w("Login", "Google sign in failed", e)
             }
@@ -133,8 +140,13 @@ class UserLogin : ScopedFragment(), KodeinAware {
         }
     }
 
-    fun upadateUI(){
-        Log.d("Login","CalledFromUser")
+    private fun signUpwithGoogle(account: GoogleSignInAccount) = launch {
+        viewModel.firebaseCreateWithGoogle(account)
+        upadateUI()
+    }
+
+    fun upadateUI() {
+        Log.d("Login", "CalledFromUser")
         mCallback?.switchAuthenticatedUser()
     }
 

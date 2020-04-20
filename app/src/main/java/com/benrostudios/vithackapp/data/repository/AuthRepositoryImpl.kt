@@ -1,7 +1,6 @@
 package com.benrostudios.vithackapp.data.repository
 
 
-
 import android.app.Activity
 import android.util.Log
 import androidx.core.app.ActivityCompat.startActivityForResult
@@ -16,14 +15,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 
-class AuthRepositoryImpl: AuthRepository {
+class AuthRepositoryImpl : AuthRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val response = MutableLiveData<Boolean>()
 
-    override fun FirebaseCreateWithEmailPassword(
+    override suspend fun firebaseCreateWithEmailPassword(
         email: String,
         password: String
-    ): LiveData<Boolean> {
+    ) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -31,15 +30,14 @@ class AuthRepositoryImpl: AuthRepository {
                 } else {
                     response.postValue(false)
                 }
-                Log.d("Login","It says: "+it.isSuccessful+"Response is: "+response)
+                Log.d("Login", "It says: " + it.isSuccessful + "Response is: " + response)
             }
-        return response
     }
 
-    override fun FirebaseSignInWithEmailPassword(
+    override suspend fun firebaseSignInWithEmailPassword(
         email: String,
         password: String
-    ): LiveData<Boolean> {
+    ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -48,10 +46,9 @@ class AuthRepositoryImpl: AuthRepository {
                     response.postValue(false)
                 }
             }
-        return response
     }
 
-    override fun FirebaseCreateWithGoogle(acct: GoogleSignInAccount): LiveData<Boolean> {
+    override suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount){
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener {
@@ -61,6 +58,9 @@ class AuthRepositoryImpl: AuthRepository {
                     response.postValue(false)
                 }
             }
+    }
+
+    override fun getAuthStatus(): LiveData<Boolean> {
         return response
     }
 
