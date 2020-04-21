@@ -1,6 +1,5 @@
-package com.benrostudios.vithackapp.ui.auth.userLogin
+package com.benrostudios.vithackapp.ui.auth.userSignIn
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,74 +9,67 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
-import com.benrostudios.vithackapp.ui.auth.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import kotlinx.android.synthetic.main.user_login_fragment.*
+import kotlinx.android.synthetic.main.user_sign_in_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-
-class UserLogin : ScopedFragment(), KodeinAware {
+class UserSignIn : ScopedFragment(), KodeinAware {
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
     override val kodein by closestKodein()
-    private val viewModelFactory: ViewModelProvider.Factory by instance()
-    private var mCallback: SwitchAuthenticatedUserFrag? = null
-    private lateinit var viewModel: UserLoginViewModel
-
+    private val viewModelFactory: UserSignInViewModelFactory by instance()
+    private lateinit var navController: NavController
     companion object {
-        fun newInstance() = UserLogin()
+        fun newInstance() = UserSignIn()
     }
 
-    interface SwitchAuthenticatedUserFrag {
-        fun switchAuthenticatedUser()
-    }
-
+    private lateinit var viewModel: UserSignInViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.user_login_fragment, container, false)
+        return inflater.inflate(R.layout.user_sign_in_fragment, container, false)
     }
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        try {
-            mCallback = activity as SwitchAuthenticatedUserFrag
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                activity.toString()
-                        + " must implement TextClicked"
-            )
-        }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(UserLoginViewModel::class.java)
-        //GoogleButton
+            .get(UserSignInViewModel::class.java)
+
+        fun CharSequence?.isValidEmail() =
+            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
         google_sign_in.setOnClickListener {
             googleSignIn()
         }
-        fun CharSequence?.isValidEmail() =
-            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-        //EmailPasswordButton
-        login_button.setOnClickListener {
+
+        sign_in_button.setOnClickListener {
+            authListener()
             val email = email_input.text
             if (email.isValidEmail()) {
                 authListener()
-                firebaseCreateWithEmailPassword(
+                signInWithEmailPassword(
                     email.toString(),
                     password_input.text.toString()
                 )
@@ -85,29 +77,16 @@ class UserLogin : ScopedFragment(), KodeinAware {
                 Toast.makeText(activity, R.string.invalid_email_toast, Toast.LENGTH_LONG).show()
             }
         }
-    }
 
-    private fun firebaseCreateWithEmailPassword(email: String, password: String) = launch {
-        viewModel.firebaseCreateWithEmailPassword(email, password)
-
-    }
-
-    private fun authListener() = launch {
-        viewModel.getAuthStatus().observeForever {
-            if (it) {
-                Log.d("Login", "Success")
-                upadateUI()
-            } else {
-                Log.d("Login", "Failure  from UserLogin")
-                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
-            }
+        switch_to_sign_up.setOnClickListener {
+            navController.navigate(R.id.action_userSignIn_to_userSignUp)
         }
+
     }
 
     private fun googleSignIn() {
         initGoogleSignInClient()
-        startGoogleSignUp()
-
+        startGoogleSignIn()
     }
 
     private fun initGoogleSignInClient() {
@@ -119,8 +98,8 @@ class UserLogin : ScopedFragment(), KodeinAware {
         googleSignInClient = GoogleSignIn.getClient(activity as AuthActivity, googleSignInOptions)
     }
 
-    private fun startGoogleSignUp() {
-        val signInIntent: Intent = googleSignInClient.getSignInIntent()
+    private fun startGoogleSignIn() {
+        val signInIntent: Intent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
@@ -132,7 +111,7 @@ class UserLogin : ScopedFragment(), KodeinAware {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
-                signUpwithGoogle(account!!)
+                signInWithGoogle(account!!)
             } catch (e: ApiException) {
                 Log.w("Login", "Google sign in failed", e)
             }
@@ -140,15 +119,31 @@ class UserLogin : ScopedFragment(), KodeinAware {
         }
     }
 
-    private fun signUpwithGoogle(account: GoogleSignInAccount) = launch {
+    private fun authListener() = launch {
+        viewModel.getAuthStatus().observeForever {
+            if (it) {
+                Log.d("Login", "Success")
+                updateUI()
+            } else {
+                Log.d("Login", "Failure  from UserLogin")
+                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun signInWithEmailPassword(email: String, password: String) = launch {
+        viewModel.firebaseSignInWithEmailPassword(email, password)
+
+    }
+
+    private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
-        upadateUI()
+        updateUI()
     }
 
-    fun upadateUI() {
-        Log.d("Login", "CalledFromUser")
-        mCallback?.switchAuthenticatedUser()
+    private fun updateUI(){
+        val intent = Intent(context,HomeActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
-
-
 }

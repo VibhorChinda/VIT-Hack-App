@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/generalDetailsForm"
-        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.GeneralDetailsFormFragment"
+        android:name="com.benrostudios.vithackapp.ui.usersetup.setupfragments.GeneralDetailsFormFragment"
         android:label="general_details_form_fragment"
         tools:layout="@layout/general_details_form_fragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/vitDetailsForm"
-        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.VitDetailsFormFragment"
+        android:name="com.benrostudios.vithackapp.ui.usersetup.setupfragments.VitDetailsFormFragment"
         android:label="vit_details_form_fragment"
         tools:layout="@layout/vit_details_form_fragment" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/companyDetailsFragment"
-        android:name="com.benrostudios.vithackapp.ui.fragments.userDetails.CompanyDetailsFragment"
+        android:name="com.benrostudios.vithackapp.ui.usersetup.setupfragments.CompanyDetailsFragment"
         android:label="fragment_company_details"
         tools:layout="@layout/fragment_company_details" />
 </navigation>

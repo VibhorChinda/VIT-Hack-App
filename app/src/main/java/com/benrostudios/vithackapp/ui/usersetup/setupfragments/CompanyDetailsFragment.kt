@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.fragments.userDetails
+package com.benrostudios.vithackapp.ui.usersetup.setupfragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

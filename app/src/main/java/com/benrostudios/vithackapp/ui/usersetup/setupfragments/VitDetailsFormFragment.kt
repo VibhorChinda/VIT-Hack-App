@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.fragments.userDetails
+package com.benrostudios.vithackapp.ui.usersetup.setupfragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 
 import com.benrostudios.vithackapp.R
-import kotlinx.android.synthetic.main.user_login_fragment.*
 import kotlinx.android.synthetic.main.vit_details_form_fragment.*
 
 class VitDetailsFormFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.benrostudios.vithackapp.ui.fragments.userDetails
+package com.benrostudios.vithackapp.ui.usersetup.setupfragments
 
 import android.annotation.SuppressLint
 import android.content.Context
