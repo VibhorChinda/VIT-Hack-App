@@ -1,52 +1,49 @@
-package com.benrostudios.vithackapp.ui.auth.userSignIn
+package com.benrostudios.vithackapp.ui.auth.welcome
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
-import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import kotlinx.android.synthetic.main.user_sign_in_fragment.*
+import kotlinx.android.synthetic.main.welcome_fragment.*
 import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class UserSignIn : ScopedFragment(), KodeinAware {
+class Welcome : ScopedFragment(), KodeinAware {
+
+    override val kodein: Kodein by closestKodein()
+    private val viewModelFactory: WelcomeViewModelFactory by instance()
+    private lateinit var navController: NavController
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
-    override val kodein by closestKodein()
-    private val viewModelFactory: UserSignInViewModelFactory by instance()
-    private lateinit var navController: NavController
 
     companion object {
-        fun newInstance() = UserSignIn()
+        fun newInstance() = Welcome()
     }
 
-    private lateinit var viewModel: UserSignInViewModel
+    private lateinit var viewModel: WelcomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.user_sign_in_fragment, container, false)
+        return inflater.inflate(R.layout.welcome_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,32 +53,20 @@ class UserSignIn : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(UserSignInViewModel::class.java)
-
-        fun CharSequence?.isValidEmail() =
-            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-
-        google_sign_in.setOnClickListener {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(WelcomeViewModel::class.java)
+        // TODO: Use the ViewModel
+        sign_up_now_button.setOnClickListener {
+            navController.navigate(R.id.action_welcome_to_userSignUp)
+        }
+        login_text.setOnClickListener {
+            navController.navigate(R.id.action_welcome_to_userSignIn)
+        }
+        continue_with_google_button.setOnClickListener {
             googleSignIn()
         }
 
-        sign_in_button.setOnClickListener {
-            authListener()
-            val email = email_input.text
-            if (email.isValidEmail()) {
-                authListener()
-                signInWithEmailPassword(
-                    email.toString(),
-                    password_input.text.toString()
-                )
-            } else {
-                Toast.makeText(activity, R.string.invalid_email_toast, Toast.LENGTH_LONG).show()
-            }
-        }
-
-
     }
+
 
     private fun googleSignIn() {
         initGoogleSignInClient()
@@ -118,23 +103,6 @@ class UserSignIn : ScopedFragment(), KodeinAware {
         }
     }
 
-    private fun authListener() = launch {
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                Log.d("Login", "Success")
-                updateUI()
-            } else {
-                Log.d("Login", "Failure  from UserLogin")
-                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
-    private fun signInWithEmailPassword(email: String, password: String) = launch {
-        viewModel.firebaseSignInWithEmailPassword(email, password)
-
-    }
-
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
         updateUI()
@@ -145,4 +113,6 @@ class UserSignIn : ScopedFragment(), KodeinAware {
         startActivity(intent)
         activity?.finish()
     }
+
+
 }

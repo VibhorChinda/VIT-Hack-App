@@ -1,16 +1,10 @@
 package com.benrostudios.vithackapp.data.repository
 
 
-import android.app.Activity
 import android.util.Log
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.benrostudios.vithackapp.R
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -48,7 +42,7 @@ class AuthRepositoryImpl : AuthRepository {
             }
     }
 
-    override suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount){
+    override suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener {
@@ -60,8 +54,7 @@ class AuthRepositoryImpl : AuthRepository {
             }
     }
 
-    override fun getAuthStatus(): LiveData<Boolean> {
-        return response
-    }
+    override val getAuthStatus: LiveData<Boolean>
+        get() = response
 
 }

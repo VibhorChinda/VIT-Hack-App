@@ -15,6 +15,13 @@
     <string name="room_number_title">Room Number</string>
     <string name="enter_details">Enter all the text fields</string>
 
+    //Welcome
+    <string name="or">OR</string>
+    <string name="sign_up_now">Sign Up Now</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="already_have_an_account">Already Have an Account?</string>
+    <string name="login">Login</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -22,5 +29,11 @@
     <string name="already_a_user">Already a User? Sign In</string>
 
     //SignIn
-    <string name="new_user">New User? Sign Up</string>
+    <string name="welcome">Welcome!</string>
+    <string name="lets_get_you_started">Let\'s get you started</string>
+    <string name="email_addr">Email Address</string>
+    <string name="password">Password</string>
+    <string name="enter_email">Enter Email Address</string>
+    <string name="enter_password">Enter your password</string>
+
 </resources>

@@ -3,22 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_authentication"
-    app:startDestination="@id/userSignIn">
+    app:startDestination="@id/welcome">
     <fragment
         android:id="@+id/userSignIn"
         android:name="com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignIn"
-        android:label="UserSignIn" >
-        <action
-            android:id="@+id/action_userSignIn_to_userSignUp"
-            app:destination="@id/userSignUp" />
-    </fragment>
+        android:label="UserSignIn" />
     <fragment
         android:id="@+id/userSignUp"
         android:name="com.benrostudios.vithackapp.ui.auth.userSignUp.UserSignUp"
         android:label="user_sign_up_fragment"
-        tools:layout="@layout/user_sign_up_fragment" >
+        tools:layout="@layout/user_sign_up_fragment" />
+    <fragment
+        android:id="@+id/welcome"
+        android:name="com.benrostudios.vithackapp.ui.auth.welcome.Welcome"
+        android:label="welcome_fragment"
+        tools:layout="@layout/welcome_fragment" >
         <action
-            android:id="@+id/action_userSignUp_to_userSignIn"
+            android:id="@+id/action_welcome_to_userSignIn"
             app:destination="@id/userSignIn" />
+        <action
+            android:id="@+id/action_welcome_to_userSignUp"
+            app:destination="@id/userSignUp" />
     </fragment>
 </navigation>

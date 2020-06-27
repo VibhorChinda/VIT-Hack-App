@@ -15,12 +15,10 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this,HomeActivity::class.java)
+        if (firebaseAuth.currentUser != null) {
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
-
-
 
 }

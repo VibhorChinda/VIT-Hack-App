@@ -9,24 +9,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 class UserSignUpViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    private val response = MutableLiveData<Boolean>()
+    val response = MutableLiveData<Boolean>()
 
-    suspend fun firebaseCreateWithEmailPassword(email: String, password: String) {
-        authRepository.firebaseCreateWithEmailPassword(email,password)
-    }
-
-
-
-
-
-
-    fun getAuthStatus(): LiveData<Boolean>{
-        authRepository.getAuthStatus().observeForever {
+    init {
+        authRepository.getAuthStatus.observeForever {
             response.postValue(it)
         }
-        return response
     }
 
-
-
+    suspend fun firebaseCreateWithEmailPassword(email: String, password: String) {
+        authRepository.firebaseCreateWithEmailPassword(email, password)
+    }
 }

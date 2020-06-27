@@ -8,5 +8,5 @@ interface AuthRepository {
     suspend fun firebaseCreateWithEmailPassword(email: String, password: String)
     suspend fun firebaseSignInWithEmailPassword(email: String, password: String)
     suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount)
-    fun getAuthStatus(): LiveData<Boolean>
+    val getAuthStatus: LiveData<Boolean>
 }

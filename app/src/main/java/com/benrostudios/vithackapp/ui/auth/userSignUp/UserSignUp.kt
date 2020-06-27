@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -68,10 +69,6 @@ class UserSignUp : ScopedFragment(), KodeinAware {
             }
         }
 
-        //SwitchToSignIn
-        switch_to_sign_in.setOnClickListener {
-            navController.navigate(R.id.action_userSignUp_to_userSignIn)
-        }
     }
 
     private fun firebaseCreateWithEmailPassword(email: String, password: String) = launch {
@@ -80,7 +77,7 @@ class UserSignUp : ScopedFragment(), KodeinAware {
     }
 
     private fun authListener() = launch {
-        viewModel.getAuthStatus().observeForever {
+        viewModel.response.observe(viewLifecycleOwner, Observer {
             if (it) {
                 Log.d("Login", "Success")
                 updateUI()
@@ -88,7 +85,7 @@ class UserSignUp : ScopedFragment(), KodeinAware {
                 Log.d("Login", "Failure  from UserLogin")
                 Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
             }
-        }
+        })
     }
 
 
