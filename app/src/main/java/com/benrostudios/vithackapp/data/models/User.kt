@@ -9,4 +9,6 @@ data class User(
     val regno: String,
     val selectedDomain: String,
     val uid: String
-)
+) {
+    constructor() : this("", "", "", "", "", "", "", "")
+}

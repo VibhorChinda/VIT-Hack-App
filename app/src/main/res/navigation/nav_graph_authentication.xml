@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_authentication"
-    app:startDestination="@id/welcome">
+    app:startDestination="@id/userSetup">
     <fragment
         android:id="@+id/userSignIn"
         android:name="com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignIn"
@@ -12,7 +12,11 @@
         android:id="@+id/userSignUp"
         android:name="com.benrostudios.vithackapp.ui.auth.userSignUp.UserSignUp"
         android:label="user_sign_up_fragment"
-        tools:layout="@layout/user_sign_up_fragment" />
+        tools:layout="@layout/user_sign_up_fragment" >
+        <action
+            android:id="@+id/action_userSignUp_to_userSetup"
+            app:destination="@id/userSetup" />
+    </fragment>
     <fragment
         android:id="@+id/welcome"
         android:name="com.benrostudios.vithackapp.ui.auth.welcome.Welcome"
@@ -25,4 +29,18 @@
             android:id="@+id/action_welcome_to_userSignUp"
             app:destination="@id/userSignUp" />
     </fragment>
+    <fragment
+        android:id="@+id/userSetup"
+        android:name="com.benrostudios.vithackapp.ui.auth.userSetUp.UserSetup"
+        android:label="user_setup_fragment"
+        tools:layout="@layout/user_setup_fragment" >
+        <action
+            android:id="@+id/action_userSetup_to_userPhone"
+            app:destination="@id/userPhone" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPhone"
+        android:name="com.benrostudios.vithackapp.ui.auth.userPhone.UserPhone"
+        android:label="user_phone_fragment"
+        tools:layout="@layout/user_phone_fragment" />
 </navigation>

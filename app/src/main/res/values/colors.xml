@@ -7,4 +7,5 @@
     <color name="yellow_accent">#ffbd3b</color>
     <color name="red_accent">#ea3883</color>
     <color name="green_accent">#bde321</color>
+    <color name="grey_accent">#2C2C2C</color>
 </resources>
