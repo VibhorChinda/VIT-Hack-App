@@ -13,6 +13,7 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,6 +33,7 @@ class Welcome : ScopedFragment(), KodeinAware {
     private lateinit var navController: NavController
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
+    private val sharedPrefUtils: SharedPrefUtils by instance()
 
     companion object {
         fun newInstance() = Welcome()
@@ -105,6 +107,7 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
+
         updateUI()
     }
 

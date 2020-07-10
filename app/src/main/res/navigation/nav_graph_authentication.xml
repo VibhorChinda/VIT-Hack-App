@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_authentication"
-    app:startDestination="@id/dynamicFaq">
+    app:startDestination="@id/welcome">
     <fragment
         android:id="@+id/userSignIn"
         android:name="com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignIn"
@@ -43,9 +43,4 @@
         android:name="com.benrostudios.vithackapp.ui.auth.userPhone.UserPhone"
         android:label="user_phone_fragment"
         tools:layout="@layout/user_phone_fragment" />
-    <fragment
-        android:id="@+id/dynamicFaq"
-        android:name="com.benrostudios.vithackapp.ui.home.dynamicfaq.DynamicFaq"
-        android:label="dynamic_faq_fragment"
-        tools:layout="@layout/dynamic_faq_fragment" />
 </navigation>

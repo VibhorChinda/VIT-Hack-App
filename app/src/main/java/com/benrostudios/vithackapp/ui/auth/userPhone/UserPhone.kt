@@ -16,6 +16,7 @@ import com.benrostudios.vithackapp.ui.auth.userSetUp.UserSetup.Companion.NAME
 import com.benrostudios.vithackapp.ui.auth.userSetUp.UserSetup.Companion.REGISTRATION_NUMBER
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.isValidPhone
 import com.benrostudios.vithackapp.utils.shortToaster
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +34,7 @@ class UserPhone : ScopedFragment(), KodeinAware {
     private lateinit var name: String
     private lateinit var institution: String
     private lateinit var registrationNumber: String
+    private val sharedPrefUtils: SharedPrefUtils by instance()
 
     companion object {
         fun newInstance() = UserPhone()
@@ -64,7 +66,7 @@ class UserPhone : ScopedFragment(), KodeinAware {
     private fun createUser() = launch {
         val uid: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         Log.d("PhoneFragment","User UID is :$uid")
-        val user = User(institution,"","",name,phone_input.text.toString(),registrationNumber,"",uid)
+        val user = User(institution,sharedPrefUtils.getFCMToken() ?: "",sharedPrefUtils.getEmailId() ?: "",name,phone_input.text.toString(),registrationNumber,"",uid)
         Log.d("PhoneFragment","User being upserted is : $user")
         viewModel.userUpsert(user)
     }
