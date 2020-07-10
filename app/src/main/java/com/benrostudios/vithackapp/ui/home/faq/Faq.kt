@@ -6,9 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.adapters.FaqAdapter
+import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.faq_fragment.*
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class Faq : Fragment() {
+class Faq : ScopedFragment(), KodeinAware {
+
+    override val kodein: Kodein by closestKodein()
+    private val viewModelFactory: FaqViewModelFactory by instance()
+    private lateinit var adapter: FaqAdapter
 
     companion object {
         fun newInstance() = Faq()
@@ -25,8 +40,19 @@ class Faq : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FaqViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this,viewModelFactory).get(FaqViewModel::class.java)
+        faq_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        fetchFaq()
+    }
+
+    private fun fetchFaq() = launch {
+        viewModel.fetchFaqs()
+        viewModel.fetchedFaqs.observe(viewLifecycleOwner, Observer {
+            if(it.isNotEmpty()){
+                adapter = FaqAdapter(it)
+                faq_recyclerView.adapter = adapter
+            }
+        })
     }
 
 }
