@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -14,11 +15,13 @@ import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.benrostudios.vithackapp.utils.shortToaster
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -107,8 +110,18 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            if(it){
+                val user = FirebaseAuth.getInstance().currentUser
+                user?.let {data ->
+                    sharedPrefUtils.setEmailId(data.email ?: "")
+                }
+                updateUI()
+            }else{
+                requireActivity().shortToaster("Error Signing In")
+            }
+        })
 
-        updateUI()
     }
 
     private fun updateUI() {

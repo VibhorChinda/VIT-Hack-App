@@ -9,6 +9,9 @@ class WelcomeViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
+    val response
+        get() = authRepository.getAuthStatus
+
     suspend fun firebaseCreateWithGoogle(acct: GoogleSignInAccount) {
         authRepository.firebaseCreateWithGoogle(acct)
     }
