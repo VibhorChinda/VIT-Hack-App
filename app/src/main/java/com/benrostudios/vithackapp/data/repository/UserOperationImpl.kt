@@ -12,13 +12,14 @@ class UserOperationImpl : UserOperation {
     private lateinit var databaseReference: DatabaseReference
     private var _checkUserStatus = MutableLiveData<Boolean>()
     private var _upsertUserStatus = MutableLiveData<Boolean>()
+    private var _fetchedUser = MutableLiveData<User>()
+
     override suspend fun checkUser(uid: String) {
         databaseReference = Firebase.database.getReference("/users/$uid")
         val checkUserFetcher = object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 _checkUserStatus.postValue(false)
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                if(snapshot.exists()){
                    _checkUserStatus.postValue(true)
@@ -37,6 +38,28 @@ class UserOperationImpl : UserOperation {
         }
     }
 
+    override suspend fun fetchUser(uid: String) {
+        databaseReference = Firebase.database.getReference("/users/$uid")
+        val userFetcher = object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val user: User? = snapshot.getValue(User::class.java)
+                    user.let {
+                        _fetchedUser.postValue(it)
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    override val fetchedUser: LiveData<User>
+        get() = _fetchedUser
     override val userCheckStatus: LiveData<Boolean>
         get() = _checkUserStatus
     override val upsertUserStatus: LiveData<Boolean>
