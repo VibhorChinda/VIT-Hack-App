@@ -52,4 +52,5 @@
     <string name="enter_phone_number">Enter your phone number</string>
     <string name="continue_btn">Continue</string>
 
+    <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
 </resources>
