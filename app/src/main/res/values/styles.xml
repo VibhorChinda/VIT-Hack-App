@@ -10,4 +10,9 @@
         <item name="android:textColor">#000</item>
     </style>
 
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#000</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
 </resources>

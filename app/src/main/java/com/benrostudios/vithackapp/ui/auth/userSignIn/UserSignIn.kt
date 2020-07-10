@@ -62,9 +62,6 @@ class UserSignIn : ScopedFragment(), KodeinAware {
         fun CharSequence?.isValidEmail() =
             !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-        google_sign_in.setOnClickListener {
-            googleSignIn()
-        }
 
         sign_in_button.setOnClickListener {
             authListener()
