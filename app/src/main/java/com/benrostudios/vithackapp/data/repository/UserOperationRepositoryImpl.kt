@@ -7,7 +7,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class UserOperationImpl : UserOperation {
+class UserOperationRepositoryImpl : UserOperationRepository {
 
     private lateinit var databaseReference: DatabaseReference
     private var _checkUserStatus = MutableLiveData<Boolean>()
@@ -31,9 +31,9 @@ class UserOperationImpl : UserOperation {
         databaseReference.addListenerForSingleValueEvent(checkUserFetcher)
     }
 
-    override suspend fun upsertUser(user: User , uid: String) {
+    override suspend fun upsertUser(user: User) {
         databaseReference = Firebase.database.getReference("/users")
-        databaseReference.child(uid).setValue(user).addOnSuccessListener {
+        databaseReference.child(user.uid).setValue(user).addOnSuccessListener {
             _upsertUserStatus.postValue(true)
         }
     }
