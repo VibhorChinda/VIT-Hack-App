@@ -7,68 +7,48 @@
     tools:context=".ui.auth.welcome.Welcome">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_up_now_button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_welcome"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:backgroundTint="@color/blue_accent"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:cornerRadius="8dp"
+        android:text="@string/sign_up_now"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/lato_bold"
-        android:text="@string/or"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_now_button" />
-
-    <Button
-        android:id="@+id/sign_up_now_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/blue_accent"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="@string/sign_up_now"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continue_with_google_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#000"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/grey_accent"
         android:fontFamily="@font/lato_bold"
-        android:padding="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/continue_with_google"
         android:textAlignment="center"
         android:textStyle="bold"
         app:cornerRadius="10dp"
+        app:iconPadding="20dp"
+        app:iconGravity="textStart"
         app:icon="@drawable/ic_google"
         app:layout_constraintEnd_toEndOf="@+id/sign_up_now_button"
         app:layout_constraintStart_toStartOf="@+id/sign_up_now_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_now_button" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:text="@string/already_have_an_account"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -76,13 +56,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/continue_with_google_button"
         app:layout_constraintTop_toBottomOf="@+id/continue_with_google_button"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintVertical_bias="0.836" />
 
     <TextView
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:text="@string/login"
         android:textAlignment="center"
         android:textColor="@color/blue_accent"
@@ -91,5 +71,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/welcome"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/welcome_sub"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
