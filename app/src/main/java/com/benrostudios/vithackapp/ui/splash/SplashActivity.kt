@@ -23,18 +23,19 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private val viewModelFactory: SplashActivityViewModelFactory by instance()
     private lateinit var viewModel: SplashActivityViewModel
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var navigationSwitch: Boolean = false //False = Auth , True = HomeActivity
 
-    private val SPLASH_TIME_OUT = 1000L
+
+    private val SPLASH_TIME_OUT = 500L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initialize()
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
+        initialize()
+
     }
 
     private fun initialize() {
-        userChecker()
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -43,34 +44,38 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_splash)
         Handler().postDelayed(
             {
-                val intent: Intent =
-                    if (navigationSwitch) {
-                        Intent(this, HomeActivity::class.java)
-                    } else {
-                        Intent(this, AuthActivity::class.java)
-                    }
-                startActivity(intent)
-                sharedPrefUtils.setFirstTimeOpen(false)
-                finish()
+                userChecker()
             }, SPLASH_TIME_OUT
         )
     }
 
     private fun userChecker() {
         if (firebaseAuth.currentUser == null) {
-            navigationSwitch = false
+            navigationHelper(false)
         } else {
             viewModel.checkUser(firebaseAuth.uid.toString())
             viewModel.checkerUser.observeForever {
-                navigationSwitch = if (it) {
+                val navTruth = if (it) {
                     true
                 } else {
                     firebaseAuth.signOut()
                     false
                 }
+                navigationHelper(navTruth)
             }
         }
+    }
 
-
+    private fun navigationHelper(truth: Boolean){
+        //False = Auth , True = HomeActivity
+        val intent: Intent =
+            if (truth) {
+                Intent(this, HomeActivity::class.java)
+            } else {
+                Intent(this, AuthActivity::class.java)
+            }
+        startActivity(intent)
+        sharedPrefUtils.setFirstTimeOpen(false)
+        finish()
     }
 }
