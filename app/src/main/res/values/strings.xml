@@ -47,7 +47,7 @@
     <string name="enter_institution_name">Your Name</string>
     <string name="reg_no">Registration Number</string>
     <string name="enter_reg_no">Enter your Registration Number</string>
-    
+
     //Phone
     <string name="phone_number">Phone Number</string>
     <string name="phone_number_sub">Enter your Phone Number so that we can send updates</string>

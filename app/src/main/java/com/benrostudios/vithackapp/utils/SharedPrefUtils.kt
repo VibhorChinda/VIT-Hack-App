@@ -37,5 +37,5 @@ class SharedPrefUtils(
     }
 
     fun getFirstTimeOpen(): Boolean =
-        sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, false)
+        sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, true)
 }

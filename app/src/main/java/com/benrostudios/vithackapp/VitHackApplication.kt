@@ -8,6 +8,7 @@ import com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignInViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.userSignUp.UserSignUpViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.welcome.WelcomeViewModelFactory
 import com.benrostudios.vithackapp.ui.home.faq.FaqViewModelFactory
+import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -30,6 +31,7 @@ class VitHackApplication : Application(), KodeinAware {
         bind() from provider { WelcomeViewModelFactory(instance(),instance()) }
         bind() from provider { UserPhoneViewModelFactory(instance()) }
         bind() from provider { FaqViewModelFactory(instance()) }
+        bind() from provider { SplashActivityViewModelFactory(instance()) }
 
     }
 
