@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -13,11 +14,14 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.benrostudios.vithackapp.utils.shortToaster
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -32,6 +36,8 @@ class Welcome : ScopedFragment(), KodeinAware {
     private lateinit var navController: NavController
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
+    private val sharedPrefUtils: SharedPrefUtils by instance()
+    private lateinit var firebaseAuth: FirebaseAuth
 
     companion object {
         fun newInstance() = Welcome()
@@ -54,7 +60,6 @@ class Welcome : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(WelcomeViewModel::class.java)
-        // TODO: Use the ViewModel
         sign_up_now_button.setOnClickListener {
             navController.navigate(R.id.action_welcome_to_userSignUp)
         }
@@ -105,13 +110,34 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
-        updateUI()
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            if(it){
+                requireActivity().shortToaster("Successful Auth , fetching info")
+                firebaseAuth  =  FirebaseAuth.getInstance()
+                val user = firebaseAuth.currentUser
+                user?.let {data ->
+                    sharedPrefUtils.setEmailId(data.email ?: "")
+                }
+                updateUI()
+            }else{
+                requireActivity().shortToaster("Error Signing In")
+            }
+        })
+
     }
 
-    private fun updateUI() {
-        val intent = Intent(context, HomeActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+    private fun updateUI() = launch {
+        viewModel.checkUser(firebaseAuth.uid.toString())
+        viewModel.userChecker.observe(viewLifecycleOwner, Observer {
+            if(it){
+                val intent = Intent(context, HomeActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }else{
+                navController.navigate(R.id.action_welcome_to_userSetup)
+            }
+        })
+
     }
 
 

@@ -16,7 +16,7 @@
     <string name="enter_details">Enter all the text fields</string>
 
     //Welcome
-    <string name="or">OR</string>
+    <string name="welcome_sub">How would you like to Sign Up?</string>
     <string name="sign_up_now">Sign Up Now</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="already_have_an_account">Already Have an Account?</string>
@@ -27,6 +27,7 @@
 
     //SignUp
     <string name="already_a_user">Already a User? Sign In</string>
+    <string name="sign_up">Sign Up</string>
 
     //SignIn
     <string name="welcome">Welcome!</string>
@@ -35,5 +36,32 @@
     <string name="password">Password</string>
     <string name="enter_email">Enter Email Address</string>
     <string name="enter_password">Enter your password</string>
+    <string name="forgot_password">Forgot Password?</string>
 
+    //Setup
+    <string name="about_you">About You</string>
+    <string name="about_you_sub">Alright, tell us about yourself</string>
+    <string name="your_name">Your Name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="institution_name">Institution\'s Name</string>
+    <string name="enter_institution_name">Your Name</string>
+    <string name="reg_no">Registration Number</string>
+    <string name="enter_reg_no">Enter your Registration Number</string>
+
+    //Phone
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_sub">Enter your Phone Number so that we can send updates</string>
+    <string name="enter_phone_number">Enter your phone number</string>
+    <string name="continue_btn">Continue</string>
+
+    //DynamicFaq
+    <string name="ask_a_ques">Ask a Question</string>
+    <string name="ask_ques">Ask Question</string>
+    <string name="cancel">Cancel</string>
+    <string name="type_quesion">Type your question</string>
+    <string name="faq_title">FAQ</string>
+    <string name="search_hint">Search FAQ</string>
+    <string name="search_title">Search</string>
+
+    <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
 </resources>

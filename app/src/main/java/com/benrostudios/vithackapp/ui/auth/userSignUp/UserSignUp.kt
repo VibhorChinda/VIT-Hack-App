@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.user_sign_up_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -28,6 +29,8 @@ class UserSignUp : ScopedFragment(), KodeinAware {
     private val viewModelFactory: UserSignUpViewModelFactory by instance()
     private lateinit var viewModel: UserSignUpViewModel
     private lateinit var navController: NavController
+    private lateinit var emailId: String
+    private val sharedPrefUtils: SharedPrefUtils by instance()
     companion object {
         fun newInstance() = UserSignUp()
     }
@@ -72,6 +75,7 @@ class UserSignUp : ScopedFragment(), KodeinAware {
     }
 
     private fun firebaseCreateWithEmailPassword(email: String, password: String) = launch {
+        emailId = email
         viewModel.firebaseCreateWithEmailPassword(email, password)
 
     }
@@ -80,6 +84,7 @@ class UserSignUp : ScopedFragment(), KodeinAware {
         viewModel.response.observe(viewLifecycleOwner, Observer {
             if (it) {
                 Log.d("Login", "Success")
+                sharedPrefUtils.setEmailId(emailId)
                 updateUI()
             } else {
                 Log.d("Login", "Failure  from UserLogin")

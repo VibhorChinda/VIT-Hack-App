@@ -1,13 +1,14 @@
 package com.benrostudios.vithackapp.data.models
 
 data class User(
-    val company: String,
+    val collegeName: String,
     val fcmToken: String,
-    val isVitan: Boolean,
     val mail: String,
     val name: String,
-    val phone: Int,
+    val phone: String,
     val regno: String,
-    val room: String,
+    val selectedDomain: String,
     val uid: String
-)
+) {
+    constructor() : this("", "", "", "", "", "", "", "")
+}
