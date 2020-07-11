@@ -32,8 +32,8 @@ fun View.show() {
 }
 
 fun EditText.isValidPhone(): Boolean {
-    var validation: Boolean = this.text.contains(Regex("/^(\\+\\d{1,3}[- ]?)?\\d{10}\$/"))
-    return if (validation && text.length == 10) {
+    val validation: Boolean =  android.util.Patterns.PHONE.matcher(this.text).matches();
+    return if (validation && text.length == 13) {
         true
     } else {
         this.error = "Please enter a valid mobile number"
