@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,36 +42,30 @@ class Faq : ScopedFragment(), KodeinAware {
         return inflater.inflate(R.layout.faq_fragment, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        faq_search_view.setQuery("",false)
-        faq_search_view.isIconifiedByDefault = true
-        faq_search_view.isIconified = true
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(FaqViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(FaqViewModel::class.java)
         faq_recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        searchViewImplementation()
         fetchFaq()
         ask_faq_btn.setOnClickListener {
             val dialogFragment = DynamicFaq()
-            dialogFragment.show(activity?.supportFragmentManager!!,dialogFragment.tag)
+            dialogFragment.show(activity?.supportFragmentManager!!, dialogFragment.tag)
         }
+        searchViewImplementation()
     }
 
     private fun fetchFaq() = launch {
         viewModel.fetchFaqs()
         viewModel.fetchedFaqs.observe(viewLifecycleOwner, Observer {
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 adapter = FaqAdapter(it)
                 faq_recyclerView.adapter = adapter
             }
         })
     }
 
-    private fun searchViewImplementation(){
+    private fun searchViewImplementation() {
         search_container.setOnClickListener {
             faq_search_view.isIconified = false
         }
@@ -81,6 +76,22 @@ class Faq : ScopedFragment(), KodeinAware {
         faq_search_view.setOnSearchClickListener {
             search_title.hide()
         }
+
+        faq_search_view.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                adapter.filter.filter(newText)
+
+                return true
+            }
+        })
+
+
     }
 
 }

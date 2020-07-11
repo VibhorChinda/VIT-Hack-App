@@ -17,7 +17,6 @@
     </style>
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="searchIcon">@drawable/ic_baseline_search_24</item>
-        <item name="android:maxWidth">1000dp</item>
         <item name="hintTextColor">@color/blue_accent</item>
         <item name="queryHint">@string/search_hint</item>
     </style>
