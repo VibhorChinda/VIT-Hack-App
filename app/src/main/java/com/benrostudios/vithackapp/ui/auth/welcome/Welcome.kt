@@ -37,6 +37,7 @@ class Welcome : ScopedFragment(), KodeinAware {
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
     private val sharedPrefUtils: SharedPrefUtils by instance()
+    private lateinit var firebaseAuth: FirebaseAuth
 
     companion object {
         fun newInstance() = Welcome()
@@ -59,7 +60,6 @@ class Welcome : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(WelcomeViewModel::class.java)
-        // TODO: Use the ViewModel
         sign_up_now_button.setOnClickListener {
             navController.navigate(R.id.action_welcome_to_userSignUp)
         }
@@ -112,7 +112,9 @@ class Welcome : ScopedFragment(), KodeinAware {
         viewModel.firebaseCreateWithGoogle(account)
         viewModel.response.observe(viewLifecycleOwner, Observer {
             if(it){
-                val user = FirebaseAuth.getInstance().currentUser
+                requireActivity().shortToaster("Successful Auth , fetching info")
+                firebaseAuth  =  FirebaseAuth.getInstance()
+                val user = firebaseAuth.currentUser
                 user?.let {data ->
                     sharedPrefUtils.setEmailId(data.email ?: "")
                 }
@@ -124,10 +126,18 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     }
 
-    private fun updateUI() {
-        val intent = Intent(context, HomeActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+    private fun updateUI() = launch {
+        viewModel.checkUser(firebaseAuth.uid.toString())
+        viewModel.userChecker.observe(viewLifecycleOwner, Observer {
+            if(it){
+                val intent = Intent(context, HomeActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }else{
+                navController.navigate(R.id.action_welcome_to_userSetup)
+            }
+        })
+
     }
 
 

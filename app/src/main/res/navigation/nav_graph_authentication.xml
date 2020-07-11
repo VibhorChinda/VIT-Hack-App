@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_welcome_to_userSignUp"
             app:destination="@id/userSignUp" />
+        <action
+            android:id="@+id/action_welcome_to_userSetup"
+            app:destination="@id/userSetup" />
     </fragment>
     <fragment
         android:id="@+id/userSetup"
