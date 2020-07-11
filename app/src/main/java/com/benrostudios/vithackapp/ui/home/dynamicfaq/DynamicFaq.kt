@@ -18,6 +18,7 @@ import com.benrostudios.vithackapp.ui.home.faq.FaqViewModelFactory
 import com.benrostudios.vithackapp.utils.isValidAlphaNumeric
 import com.benrostudios.vithackapp.utils.shortToaster
 import kotlinx.android.synthetic.main.dynamic_faq_fragment.*
+import kotlinx.android.synthetic.main.faq_fragment.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -44,6 +45,7 @@ class DynamicFaq : DialogFragment(), KodeinAware {
         }
         return inflater.inflate(R.layout.dynamic_faq_fragment, container, false)
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

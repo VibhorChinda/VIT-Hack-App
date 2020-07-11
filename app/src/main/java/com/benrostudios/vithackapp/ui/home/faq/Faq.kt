@@ -13,6 +13,8 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.adapters.FaqAdapter
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.dynamicfaq.DynamicFaq
+import com.benrostudios.vithackapp.utils.hide
+import com.benrostudios.vithackapp.utils.show
 import kotlinx.android.synthetic.main.faq_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -39,12 +41,20 @@ class Faq : ScopedFragment(), KodeinAware {
         return inflater.inflate(R.layout.faq_fragment, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        faq_search_view.setQuery("",false)
+        faq_search_view.isIconifiedByDefault = true
+        faq_search_view.isIconified = true
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory).get(FaqViewModel::class.java)
         faq_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        searchViewImplementation()
         fetchFaq()
-        test_faq_btn.setOnClickListener {
+        ask_faq_btn.setOnClickListener {
             val dialogFragment = DynamicFaq()
             dialogFragment.show(activity?.supportFragmentManager!!,dialogFragment.tag)
         }
@@ -58,6 +68,19 @@ class Faq : ScopedFragment(), KodeinAware {
                 faq_recyclerView.adapter = adapter
             }
         })
+    }
+
+    private fun searchViewImplementation(){
+        search_container.setOnClickListener {
+            faq_search_view.isIconified = false
+        }
+        faq_search_view.setOnCloseListener {
+            search_title.show()
+            false
+        }
+        faq_search_view.setOnSearchClickListener {
+            search_title.hide()
+        }
     }
 
 }

@@ -59,6 +59,9 @@
     <string name="ask_ques">Ask Question</string>
     <string name="cancel">Cancel</string>
     <string name="type_quesion">Type your question</string>
+    <string name="faq_title">FAQ</string>
+    <string name="search_hint">Search FAQ</string>
+    <string name="search_title">Search</string>
 
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
 </resources>
