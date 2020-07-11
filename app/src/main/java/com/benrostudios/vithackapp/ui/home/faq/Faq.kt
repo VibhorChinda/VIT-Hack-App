@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.adapters.FaqAdapter
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.home.dynamicfaq.DynamicFaq
 import kotlinx.android.synthetic.main.faq_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -43,6 +44,10 @@ class Faq : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this,viewModelFactory).get(FaqViewModel::class.java)
         faq_recyclerView.layoutManager = LinearLayoutManager(requireContext())
         fetchFaq()
+        test_faq_btn.setOnClickListener {
+            val dialogFragment = DynamicFaq()
+            dialogFragment.show(activity?.supportFragmentManager!!,dialogFragment.tag)
+        }
     }
 
     private fun fetchFaq() = launch {

@@ -2,8 +2,11 @@ package com.benrostudios.vithackapp.ui.home.faq
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.benrostudios.vithackapp.data.models.FAQ
 import com.benrostudios.vithackapp.data.repository.FaqRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FaqViewModel(
     private val faqRepository: FaqRepository
@@ -19,8 +22,11 @@ class FaqViewModel(
         faqRepository.fetchFaqs()
     }
 
-    suspend fun postFaq(question: String) {
-        faqRepository.postFaq(question)
+     fun postFaq(question: String) {
+         viewModelScope.launch(Dispatchers.IO){
+             faqRepository.postFaq(question)
+         }
+
     }
 
 }
