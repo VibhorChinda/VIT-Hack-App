@@ -43,9 +43,9 @@ class FaqRepositoryImpl : FaqRepository {
 
 
 
-    override suspend fun postFaq(question: String) {
+    override suspend fun postFaq(question: String, time:String) {
         databaseReference = Firebase.database.getReference("/QFAQs")
-        databaseReference.child("question").setValue(question).addOnSuccessListener {
+        databaseReference.child(time).setValue(question).addOnSuccessListener {
             _postFaqStatus.postValue(true)
         }
     }

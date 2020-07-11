@@ -58,7 +58,7 @@ class DynamicFaq : DialogFragment(), KodeinAware {
         }
     }
     fun postQuestion(question: String){
-        viewModel.postFaq(question)
+        viewModel.postFaq(question,System.currentTimeMillis().toString())
         viewModel.postFaqStatus.observe(viewLifecycleOwner, Observer {
             if(it){
                 requireActivity().shortToaster("Question Posted Successfully!")

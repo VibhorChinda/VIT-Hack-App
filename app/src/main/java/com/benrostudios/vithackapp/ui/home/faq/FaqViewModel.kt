@@ -22,9 +22,9 @@ class FaqViewModel(
         faqRepository.fetchFaqs()
     }
 
-     fun postFaq(question: String) {
+     fun postFaq(question: String, time: String) {
          viewModelScope.launch(Dispatchers.IO){
-             faqRepository.postFaq(question)
+             faqRepository.postFaq(question,time)
          }
 
     }
