@@ -50,24 +50,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/about_us_dev_linked_in"
                 app:layout_constraintTop_toBottomOf="@+id/about_us_dev_post"
                 app:srcCompat="@drawable/ic_github" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
 
             <ImageView
                 android:id="@+id/about_us_dev_linked_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintEnd_toEndOf="@+id/about_us_dev_post"
+                app:layout_constraintStart_toStartOf="@+id/about_us_dev_post"
                 app:layout_constraintTop_toTopOf="@+id/about_us_dev_github"
                 app:srcCompat="@drawable/ic_linked_in" />
 
@@ -80,6 +73,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/about_us_email_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/about_us_dev_linked_in"
+                app:layout_constraintStart_toEndOf="@+id/about_us_dev_linked_in"
+                app:srcCompat="@drawable/ic_email" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

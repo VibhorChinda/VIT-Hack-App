@@ -6,5 +6,6 @@ data class Developer(
     val githubLink: String,
     val linkedInLink:String,
     val dribbleLink:String,
-    val emailId: String
+    val emailId: String,
+    val instagramLink:String
 )

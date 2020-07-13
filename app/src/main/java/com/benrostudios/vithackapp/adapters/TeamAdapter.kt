@@ -3,6 +3,7 @@ package com.benrostudios.vithackapp.adapters
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
         val post: TextView = v.about_us_dev_post
         val github: ImageView = v.about_us_dev_github
         val linkedIn: ImageView = v.about_us_dev_linked_in
+        val email:ImageView = v.about_us_email_id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -35,8 +37,25 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         holder.name.text = devData[position].name
         holder.post.text = devData[position].post
-        holder.github.setOnClickListener {
-            openLink(devData[position].githubLink)
+        if(devData[position].githubLink.isBlank()){
+            holder.github.setImageDrawable(mContext.getDrawable(R.drawable.ic_dribbble_circle_filled))
+            holder.github.setOnClickListener {
+                openLink(devData[position].dribbleLink)
+            }
+        }else{
+            holder.github.setOnClickListener {
+                openLink(devData[position].githubLink)
+            }
+        }
+        if(devData[position].instagramLink.isBlank()){
+            holder.email.setOnClickListener {
+                openLink(devData[position].linkedInLink)
+            }
+        }else{
+            holder.email.setImageDrawable(mContext.getDrawable(R.drawable.ic_instagram_filled))
+            holder.email.setOnClickListener {
+                openLink(devData[position].instagramLink)
+            }
         }
         holder.linkedIn.setOnClickListener {
             openLink(devData[position].linkedInLink)
