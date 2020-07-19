@@ -63,5 +63,19 @@
     <string name="search_hint">Search FAQ</string>
     <string name="search_title">Search</string>
 
+    //Timeline
+    <string name="timeline_text">Timeline</string>
+    <string name="start_timeline">START</string>
+    <string name="timeline_session_start_time">9:00 AM</string>
+    <string name="timeline_session_title">Inauguration</string>
+
+    //Domains
+    <string name="domain_machine_learning">Machine Learning</string>
+    <string name="domain_show_more_button">Show more</string>
+    <string name="domain_text">Domains</string>
+
+    //ProblemStatement
+    <string name="problem_statement_text">Problem Statement</string>
+
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
 </resources>
