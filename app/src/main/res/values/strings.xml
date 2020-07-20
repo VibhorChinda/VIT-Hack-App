@@ -77,5 +77,22 @@
     //ProblemStatement
     <string name="problem_statement_text">Problem Statement</string>
 
+    //Profile
+    <string name="vit_hack_text">VITHack\'2020</string>
+    <string name="whats_up_text">What\'s up</string>
+    <string name="are_you_enjoying">Are you enjoying VITHack?</string>
+    <string name="your_name_text">Your Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="institute_text">Your Institute</string>
+    <string name="logout_button">Log Out</string>
+    <string name="dark_mode_text">DARK MODE</string>
+
+    //On Boarding
+    <string name="welcome_to_text">WELCOME TO</string>
+    <string name="vit_hack">VIT HACK</string>
+    <string name="on_boarding_text_1"> The hackathon will be focusing on the feasibility, application, resourcefulness and fundability of each project idea presented by the participant</string>
+    <string name="on_boarding_text_2">Real-world problem statement aimed towards challenging yout abilities and tons more is in store for you</string>
+    <string name="on_boarding_text_3">VITHack isa 36-Hur hackathon spread over the course of 3 days. Participants are continually encouraged to network with industry professionals in this confluence of knowledge and ideas</string>
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
 </resources>
