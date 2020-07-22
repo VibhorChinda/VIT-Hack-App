@@ -7,24 +7,24 @@
     tools:context=".ui.home.timeline.Timeline">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/timeline_recycler_view"
+        android:id="@+id/problem_statement_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        tools:listitem="@layout/timeline_list_item" />
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        tools:listitem="@layout/problem_statement_list_item" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/lato_bold"
-        android:text="@string/timeline_text"
+        android:text="@string/problem_statement_text"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,16 +32,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView28"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/lato_regular"
-        android:text="@string/start_timeline"
-        android:textColor="@color/blue_accent"
-        android:textSize="24sp"
+        android:text="@string/placeholder"
+        android:textColor="@color/dark_grey_accent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
