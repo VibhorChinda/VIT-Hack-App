@@ -19,6 +19,8 @@ import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
 import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.benrostudios.vithackapp.utils.isValidAlphaNumeric
+import com.benrostudios.vithackapp.utils.isValidEmail
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -60,21 +62,18 @@ class UserSignIn : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(UserSignInViewModel::class.java)
 
-        fun CharSequence?.isValidEmail() =
-            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 
         sign_in_button.setOnClickListener {
-            authListener()
-            val email = email_input.text
-            if (email.isValidEmail()) {
+            if (email_input.isValidEmail() && password_input.isValidAlphaNumeric(
+                    "Password"
+                )
+            ) {
                 authListener()
                 signInWithEmailPassword(
-                    email.toString(),
+                    email_input.text.toString(),
                     password_input.text.toString()
                 )
-            } else {
-                Toast.makeText(activity, R.string.invalid_email_toast, Toast.LENGTH_LONG).show()
             }
         }
 

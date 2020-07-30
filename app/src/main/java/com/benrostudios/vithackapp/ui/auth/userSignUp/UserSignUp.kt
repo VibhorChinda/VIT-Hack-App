@@ -1,10 +1,9 @@
 package com.benrostudios.vithackapp.ui.auth.userSignUp
 
-import android.app.Activity
-import android.content.Intent
+
+
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
-import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.benrostudios.vithackapp.utils.isValidAlphaNumeric
+import com.benrostudios.vithackapp.utils.isValidEmail
 import kotlinx.android.synthetic.main.user_sign_up_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -31,10 +31,10 @@ class UserSignUp : ScopedFragment(), KodeinAware {
     private lateinit var navController: NavController
     private lateinit var emailId: String
     private val sharedPrefUtils: SharedPrefUtils by instance()
+
     companion object {
         fun newInstance() = UserSignUp()
     }
-
 
 
     override fun onCreateView(
@@ -56,19 +56,14 @@ class UserSignUp : ScopedFragment(), KodeinAware {
             .get(UserSignUpViewModel::class.java)
 
 
-        fun CharSequence?.isValidEmail() =
-            !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
         //EmailPasswordButton
         sign_up_button.setOnClickListener {
-            val email = email_input.text
-            if (email.isValidEmail()) {
+            if (email_input.isValidEmail() && password_input.isValidAlphaNumeric("Password")) {
                 authListener()
                 firebaseCreateWithEmailPassword(
-                    email.toString(),
+                    email_input.text.toString(),
                     password_input.text.toString()
                 )
-            } else {
-                Toast.makeText(activity, R.string.invalid_email_toast, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -94,12 +89,9 @@ class UserSignUp : ScopedFragment(), KodeinAware {
     }
 
 
-    fun updateUI() {
+    private fun updateUI() {
         Log.d("Login", "CalledFromUser")
-        val intent = Intent(context,ProfileSetupActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+        navController.navigate(R.id.action_userSignUp_to_userSetup)
     }
-
 
 }
