@@ -11,7 +11,9 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.home.HomeActivity
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.benrostudios.vithackapp.utils.show
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -25,7 +27,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
 
-    private val SPLASH_TIME_OUT = 500L
+    private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel =
@@ -42,17 +44,20 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_splash)
-        Handler().postDelayed(
-            {
-                userChecker()
-            }, SPLASH_TIME_OUT
-        )
+        userChecker()
     }
 
     private fun userChecker() {
         if (firebaseAuth.currentUser == null) {
-            navigationHelper(false)
+            Handler().postDelayed(
+                {
+                    navigationHelper(false)
+                }, SPLASH_TIME_OUT
+            )
+
         } else {
+            splash_progress.show()
+            user_info_fetcher_display.show()
             viewModel.checkUser(firebaseAuth.uid.toString())
             viewModel.checkerUser.observeForever {
                 val navTruth = if (it) {
@@ -66,7 +71,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun navigationHelper(truth: Boolean){
+    private fun navigationHelper(truth: Boolean) {
         //False = Auth , True = HomeActivity
         val intent: Intent =
             if (truth) {

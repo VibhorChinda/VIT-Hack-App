@@ -22,6 +22,10 @@
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="login">Login</string>
 
+    //Splash
+    <string name="fetching_user_info">Fetching User Info</string>
+    <string name="auth_in_progress">Authentication in Progress</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

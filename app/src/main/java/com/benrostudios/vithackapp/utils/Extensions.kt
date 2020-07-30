@@ -5,6 +5,8 @@ import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.benrostudios.vithackapp.R
+import com.google.android.material.snackbar.Snackbar
 
 fun Context.shortToaster(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -43,6 +45,18 @@ fun EditText.isValidEmail(): Boolean {
         this.error = "Please enter a valid Email ID"
         false
     }
+}
+
+fun View.errorSnackBar(msg: String){
+    val snack = Snackbar.make(this, msg, Snackbar.LENGTH_LONG)
+    snack.setBackgroundTint(resources.getColor(R.color.error_red))
+    snack.show()
+}
+
+fun View.successSnackBar(msg: String){
+    val snack = Snackbar.make(this, msg, Snackbar.LENGTH_LONG)
+    snack.setBackgroundTint(resources.getColor(R.color.success_green))
+    snack.show()
 }
 
 fun View.hide() {

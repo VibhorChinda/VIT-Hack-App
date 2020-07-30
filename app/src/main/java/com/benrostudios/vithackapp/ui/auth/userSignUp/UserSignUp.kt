@@ -7,16 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
-import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.benrostudios.vithackapp.utils.isValidAlphaNumeric
-import com.benrostudios.vithackapp.utils.isValidEmail
+import com.benrostudios.vithackapp.utils.*
 import kotlinx.android.synthetic.main.user_sign_up_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -59,6 +56,8 @@ class UserSignUp : ScopedFragment(), KodeinAware {
         //EmailPasswordButton
         sign_up_button.setOnClickListener {
             if (email_input.isValidEmail() && password_input.isValidAlphaNumeric("Password")) {
+                sign_up_button.hide()
+                sign_up_progress.show()
                 authListener()
                 firebaseCreateWithEmailPassword(
                     email_input.text.toString(),
@@ -82,8 +81,11 @@ class UserSignUp : ScopedFragment(), KodeinAware {
                 sharedPrefUtils.setEmailId(emailId)
                 updateUI()
             } else {
+                sign_up_progress.hide()
+                sign_up_button.show()
                 Log.d("Login", "Failure  from UserLogin")
-                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
+                sign_up_container.errorSnackBar("Sign Up Error!")
+                //Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
             }
         })
     }

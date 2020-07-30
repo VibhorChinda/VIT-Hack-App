@@ -3,29 +3,18 @@ package com.benrostudios.vithackapp.ui.auth.userSignIn
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 
 import com.benrostudios.vithackapp.R
-import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
-import com.benrostudios.vithackapp.ui.usersetup.ProfileSetupActivity
-import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.benrostudios.vithackapp.utils.isValidAlphaNumeric
-import com.benrostudios.vithackapp.utils.isValidEmail
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
+import com.benrostudios.vithackapp.utils.*
 import kotlinx.android.synthetic.main.user_sign_in_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -69,6 +58,8 @@ class UserSignIn : ScopedFragment(), KodeinAware {
                     "Password"
                 )
             ) {
+                sign_in_button.hide()
+                sign_in_progress.show()
                 authListener()
                 signInWithEmailPassword(
                     email_input.text.toString(),
@@ -87,8 +78,11 @@ class UserSignIn : ScopedFragment(), KodeinAware {
                 sharedPrefUtils.setEmailId(emailId)
                 updateUI()
             } else {
+                sign_in_progress.hide()
+                sign_in_button.show()
                 Log.d("Login", "Failure  from UserLogin")
-                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
+                sign_in_container.errorSnackBar("Invalid Credentials")
+                //Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show()
             }
         })
     }
