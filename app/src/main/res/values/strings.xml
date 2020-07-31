@@ -98,6 +98,7 @@
     <string name="sponsor">Sponsors</string>
     <string name="about_us">About Us</string>
     <string name="join_now">Join Now</string>
+    <string name="team">Developers</string>
 
     //BottomNavHelpers
     <string name="timeline">Timeline</string>

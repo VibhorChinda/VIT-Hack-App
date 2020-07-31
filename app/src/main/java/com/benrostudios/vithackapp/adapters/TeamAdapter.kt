@@ -12,6 +12,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Developer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.about_us_item.*
 import kotlinx.android.synthetic.main.about_us_item.view.*
 
 class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
@@ -24,6 +29,7 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
         val github: ImageView = v.about_us_dev_github
         val linkedIn: ImageView = v.about_us_dev_linked_in
         val email:ImageView = v.about_us_email_id
+        val devImage: ImageView = v.dev_image
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -35,6 +41,16 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
     override fun getItemCount(): Int = devData.size
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
+        val storageReference: StorageReference = FirebaseStorage.getInstance().reference
+        val devPictureTest = storageReference.child("Testing/speaker1.png")
+        val options: RequestOptions = RequestOptions()
+            .circleCrop()
+
+        Glide.with(mContext)
+            .load(devPictureTest)
+            .apply(options)
+            .into(holder.devImage)
+
         holder.name.text = devData[position].name
         holder.post.text = devData[position].post
         if(devData[position].githubLink.isBlank()){
