@@ -29,4 +29,9 @@
         android:name="com.benrostudios.vithackapp.ui.home.faq.Faq"
         android:label="faq_fragment"
         tools:layout="@layout/faq_fragment" />
+    <fragment
+        android:id="@+id/speakers"
+        android:name="com.benrostudios.vithackapp.ui.home.speakers.Speakers"
+        android:label="speakers_fragment"
+        tools:layout="@layout/speakers_fragment" />
 </navigation>

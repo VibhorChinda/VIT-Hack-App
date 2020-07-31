@@ -94,6 +94,7 @@
 
     //BottomNavHelpers
     <string name="timeline">Timeline</string>
+    <string name="speakers">Speakers</string>
     <string name="Faq">Faq</string>
     <string name="profile">Profile</string>
 

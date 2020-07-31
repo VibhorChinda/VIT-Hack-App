@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_baseline_star_24"
         android:title="@string/timeline" />
     <item
+        android:id="@+id/speakers"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/speakers" />
+    <item
         android:id="@+id/problemStatement"
         android:icon="@drawable/ic_baseline_star_24"
         android:title="@string/problem_statement_text" />
