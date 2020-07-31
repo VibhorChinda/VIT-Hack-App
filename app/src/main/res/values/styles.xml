@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/blue_accent</item>
         <item name="colorPrimaryDark">@color/grey_accent</item>
         <item name="colorAccent">@color/blue_accent</item>
         <item name="android:fontFamily">@font/lato_regular</item>

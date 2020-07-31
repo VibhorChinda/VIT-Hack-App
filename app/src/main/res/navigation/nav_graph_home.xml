@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/timeline">
+
+    <fragment
+        android:id="@+id/timeline"
+        android:name="com.benrostudios.vithackapp.ui.home.timeline.Timeline"
+        android:label="timeline_fragment"
+        tools:layout="@layout/timeline_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.benrostudios.vithackapp.ui.home.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/aboutUs"
+        android:name="com.benrostudios.vithackapp.ui.home.aboutus.AboutUs"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/problemStatement"
+        android:name="com.benrostudios.vithackapp.ui.home.problemStatement.ProblemStatement"
+        android:label="ProblemStatement" />
+    <fragment
+        android:id="@+id/faq"
+        android:name="com.benrostudios.vithackapp.ui.home.faq.Faq"
+        android:label="faq_fragment"
+        tools:layout="@layout/faq_fragment" />
+</navigation>

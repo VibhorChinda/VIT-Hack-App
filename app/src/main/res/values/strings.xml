@@ -92,6 +92,11 @@
     <string name="logout_button">Log Out</string>
     <string name="dark_mode_text">DARK MODE</string>
 
+    //BottomNavHelpers
+    <string name="timeline">Timeline</string>
+    <string name="Faq">Faq</string>
+    <string name="profile">Profile</string>
+
     //On Boarding
     <string name="welcome_to_text">WELCOME TO</string>
     <string name="vit_hack">VIT HACK</string>
