@@ -26,8 +26,9 @@ fun EditText.isValidAlphaNumeric(errorDisplay: String): Boolean {
 }
 
 fun EditText.isValidPhone(): Boolean {
-    val validation: Boolean = android.util.Patterns.PHONE.matcher(this.text).matches();
-    return if (validation && text.length == 13) {
+    val pattern = Regex("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}\$")
+    val validation: Boolean = pattern.containsMatchIn(this.text.toString())
+    return if (validation ) {
         true
     } else {
         this.error = "Please enter a valid mobile number"

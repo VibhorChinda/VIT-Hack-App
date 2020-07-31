@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="@+id/password_input"
         app:layout_constraintStart_toStartOf="@+id/password_input"
         app:layout_constraintTop_toBottomOf="@+id/password_input"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <EditText
         android:id="@+id/password_input"
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/lato_bold"
         android:text="@string/welcome"
         android:textColor="@android:color/black"
@@ -106,6 +106,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/lets_get_you_started"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView7"

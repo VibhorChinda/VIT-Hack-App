@@ -89,7 +89,7 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/welcome_sub"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView10"

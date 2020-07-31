@@ -55,6 +55,7 @@ class UserPhone : ScopedFragment(), KodeinAware {
         name = arguments?.getString(NAME).toString()
         institution = arguments?.getString(INSTITUTION_NAME).toString()
         registrationNumber = arguments?.getString(REGISTRATION_NUMBER).toString()
+        phone_input.setSelection(4)
         phone_number_continue_btn.setOnClickListener {
             if (phone_input.isValidPhone()) {
                 createUser()

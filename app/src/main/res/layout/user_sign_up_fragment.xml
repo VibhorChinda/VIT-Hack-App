@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/lato_bold"
         android:text="@string/welcome"
         android:textColor="@android:color/black"
@@ -26,6 +26,7 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/lets_get_you_started"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView12"
@@ -94,7 +95,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password_input"
         app:layout_constraintTop_toBottomOf="@+id/password_input"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <ProgressBar
         android:visibility="invisible"

@@ -15,7 +15,9 @@
         tools:layout="@layout/user_sign_up_fragment" >
         <action
             android:id="@+id/action_userSignUp_to_userSetup"
-            app:destination="@id/userSetup" />
+            app:destination="@id/userSetup"
+            app:popUpTo="@id/welcome"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/welcome"
@@ -30,7 +32,9 @@
             app:destination="@id/userSignUp" />
         <action
             android:id="@+id/action_welcome_to_userSetup"
-            app:destination="@id/userSetup" />
+            app:destination="@id/userSetup"
+            app:popUpTo="@id/welcome"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/userSetup"
