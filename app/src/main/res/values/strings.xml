@@ -92,6 +92,13 @@
     <string name="logout_button">Log Out</string>
     <string name="dark_mode_text">DARK MODE</string>
 
+
+    //Speakers
+    <string name="collaborators">Collaborators</string>
+    <string name="sponsor">Sponsors</string>
+    <string name="about_us">About Us</string>
+    <string name="join_now">Join Now</string>
+
     //BottomNavHelpers
     <string name="timeline">Timeline</string>
     <string name="speakers">Speakers</string>

@@ -33,5 +33,9 @@
         android:id="@+id/speakers"
         android:name="com.benrostudios.vithackapp.ui.home.speakers.Speakers"
         android:label="speakers_fragment"
-        tools:layout="@layout/speakers_fragment" />
+        tools:layout="@layout/speakers_fragment" >
+        <action
+            android:id="@+id/action_speakers_to_aboutUs"
+            app:destination="@id/aboutUs" />
+    </fragment>
 </navigation>
