@@ -22,6 +22,10 @@
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="login">Login</string>
 
+    //Splash
+    <string name="fetching_user_info">Fetching User Info</string>
+    <string name="auth_in_progress">Authentication in Progress</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -87,6 +91,20 @@
     <string name="institute_text">Your Institute</string>
     <string name="logout_button">Log Out</string>
     <string name="dark_mode_text">DARK MODE</string>
+
+
+    //Speakers
+    <string name="collaborators">Collaborators</string>
+    <string name="sponsor">Sponsors</string>
+    <string name="about_us">About Us</string>
+    <string name="join_now">Join Now</string>
+    <string name="team">Developers</string>
+
+    //BottomNavHelpers
+    <string name="timeline">Timeline</string>
+    <string name="speakers">Speakers</string>
+    <string name="Faq">Faq</string>
+    <string name="profile">Profile</string>
 
     //On Boarding
     <string name="welcome_to_text">WELCOME TO</string>

@@ -14,8 +14,7 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
-import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.benrostudios.vithackapp.utils.shortToaster
+import com.benrostudios.vithackapp.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -74,6 +73,8 @@ class Welcome : ScopedFragment(), KodeinAware {
 
 
     private fun googleSignIn() {
+        welcome_progress.show()
+        welcome_progress_text.show()
         initGoogleSignInClient()
         startGoogleSignIn()
     }
@@ -111,16 +112,20 @@ class Welcome : ScopedFragment(), KodeinAware {
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
         viewModel.response.observe(viewLifecycleOwner, Observer {
-            if(it){
-                requireActivity().shortToaster("Successful Auth , fetching info")
-                firebaseAuth  =  FirebaseAuth.getInstance()
+            if (it) {
+                welcome_container.successSnackBar("Successful Authentication!")
+                welcome_progress_text.text = resources.getString(R.string.fetching_user_info)
+
+                firebaseAuth = FirebaseAuth.getInstance()
                 val user = firebaseAuth.currentUser
-                user?.let {data ->
+                user?.let { data ->
                     sharedPrefUtils.setEmailId(data.email ?: "")
                 }
                 updateUI()
-            }else{
-                requireActivity().shortToaster("Error Signing In")
+            } else {
+                welcome_container.errorSnackBar("Error Signing In")
+                welcome_progress.hide()
+                welcome_progress_text.hide()
             }
         })
 
@@ -129,11 +134,11 @@ class Welcome : ScopedFragment(), KodeinAware {
     private fun updateUI() = launch {
         viewModel.checkUser(firebaseAuth.uid.toString())
         viewModel.userChecker.observe(viewLifecycleOwner, Observer {
-            if(it){
+            if (it) {
                 val intent = Intent(context, HomeActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
-            }else{
+            } else {
                 navController.navigate(R.id.action_welcome_to_userSetup)
             }
         })

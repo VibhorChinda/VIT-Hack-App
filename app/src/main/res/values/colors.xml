@@ -6,6 +6,8 @@
     <color name="blue_accent">#0071CD</color>
     <color name="yellow_accent">#ffbd3b</color>
     <color name="red_accent">#ea3883</color>
+    <color name="error_red">#d32f2f</color>
+    <color name="success_green">#4caf50</color>
     <color name="green_accent">#bde321</color>
     <color name="grey_accent">#2C2C2C</color>
     <color name="dark_grey_accent">#595959</color>

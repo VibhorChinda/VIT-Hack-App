@@ -1,10 +1,12 @@
 package com.benrostudios.vithackapp.utils
 
-import android.app.ProgressDialog.show
 import android.content.Context
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.benrostudios.vithackapp.R
+import com.google.android.material.snackbar.Snackbar
 
 fun Context.shortToaster(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -23,6 +25,41 @@ fun EditText.isValidAlphaNumeric(errorDisplay: String): Boolean {
     }
 }
 
+fun EditText.isValidPhone(): Boolean {
+    val pattern = Regex("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}\$")
+    val validation: Boolean = pattern.containsMatchIn(this.text.toString())
+    return if (validation ) {
+        true
+    } else {
+        this.error = "Please enter a valid mobile number"
+        false
+    }
+}
+
+fun EditText.isValidEmail(): Boolean {
+    val validation: Boolean =
+        (this.text.toString().isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this.text.toString())
+            .matches())
+    return if (validation) {
+        true
+    } else {
+        this.error = "Please enter a valid Email ID"
+        false
+    }
+}
+
+fun View.errorSnackBar(msg: String){
+    val snack = Snackbar.make(this, msg, Snackbar.LENGTH_LONG)
+    snack.setBackgroundTint(resources.getColor(R.color.error_red))
+    snack.show()
+}
+
+fun View.successSnackBar(msg: String){
+    val snack = Snackbar.make(this, msg, Snackbar.LENGTH_LONG)
+    snack.setBackgroundTint(resources.getColor(R.color.success_green))
+    snack.show()
+}
+
 fun View.hide() {
     this.visibility = View.INVISIBLE
 }
@@ -31,12 +68,3 @@ fun View.show() {
     this.visibility = View.VISIBLE
 }
 
-fun EditText.isValidPhone(): Boolean {
-    val validation: Boolean =  android.util.Patterns.PHONE.matcher(this.text).matches();
-    return if (validation && text.length == 13) {
-        true
-    } else {
-        this.error = "Please enter a valid mobile number"
-        false
-    }
-}
