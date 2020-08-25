@@ -9,11 +9,17 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.ui.home.aboutus.AboutUs
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.speakers_fragment.*
 import kotlinx.android.synthetic.main.user_setup_fragment.*
 
 class Speakers : Fragment() {
     private lateinit var navController: NavController
+
     companion object {
         fun newInstance() = Speakers()
     }
