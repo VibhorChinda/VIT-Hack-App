@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.adapters.CompanyAdapter
 import com.benrostudios.vithackapp.ui.home.aboutus.AboutUs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -19,6 +21,10 @@ import kotlinx.android.synthetic.main.user_setup_fragment.*
 
 class Speakers : Fragment() {
     private lateinit var navController: NavController
+    private var collaboratorsList: MutableList<String> = mutableListOf()
+    private var sponsorsList: MutableList<String> = mutableListOf()
+    private lateinit var collaboratorsAdapter: CompanyAdapter
+    private lateinit var sponsorsAdapter: CompanyAdapter
 
     companion object {
         fun newInstance() = Speakers()
@@ -44,7 +50,31 @@ class Speakers : Fragment() {
         about_us_btn.setOnClickListener {
             navController.navigate(R.id.action_speakers_to_aboutUs)
         }
-        // TODO: Use the ViewModel
+        val linearLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val linearLayoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        collborators_recyclerView.layoutManager = linearLayoutManager
+        sponsor_recycler.layoutManager = linearLayoutManager2
+        inflateCollaborators()
+        inflateSponsors()
+    }
+
+    private fun inflateCollaborators() {
+        for (i in 1..3) {
+            collaboratorsList.add("Testing/collaborator$i.png")
+        }
+        collaboratorsAdapter = CompanyAdapter(collaboratorsList)
+        collborators_recyclerView.adapter = collaboratorsAdapter
+
+    }
+
+    private fun inflateSponsors() {
+        for (i in 1..3) {
+            sponsorsList.add("Testing/sponsor$i.png")
+        }
+        sponsorsAdapter = CompanyAdapter(sponsorsList)
+        sponsor_recycler.adapter = sponsorsAdapter
     }
 
 }
