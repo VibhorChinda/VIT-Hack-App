@@ -72,7 +72,7 @@ class UserSignIn : ScopedFragment(), KodeinAware {
     }
 
     private fun authListener() = launch {
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.response.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 Log.d("Login", "Success")
                 sharedPrefUtils.setEmailId(emailId)

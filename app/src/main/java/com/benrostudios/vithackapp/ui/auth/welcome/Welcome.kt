@@ -111,7 +111,7 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.response.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 welcome_container.successSnackBar("Successful Authentication!")
                 welcome_progress_text.text = resources.getString(R.string.fetching_user_info)
