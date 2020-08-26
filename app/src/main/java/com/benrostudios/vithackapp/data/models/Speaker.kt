@@ -10,4 +10,6 @@ data class Speaker(
     var name: String, // Elon Musk
     var sessionUrl: String, // https://www.youtube.com/watch?v=Ycnz60960W4
     var startUnix: Int // 1594800000
-)
+) {
+    constructor() : this("", "", 0, "", "", "", 0)
+}

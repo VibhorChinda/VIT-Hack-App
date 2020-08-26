@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.adapters.CompanyAdapter
+import com.benrostudios.vithackapp.adapters.SpeakerAdapter
+import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.aboutus.AboutUs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,13 +22,21 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.speakers_fragment.*
 import kotlinx.android.synthetic.main.user_setup_fragment.*
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class Speakers : Fragment() {
+class Speakers : ScopedFragment(), KodeinAware {
+    override val kodein: Kodein by closestKodein()
+    private val viewModelFactory: SpeakersViewModelFactory by instance()
     private lateinit var navController: NavController
     private var collaboratorsList: MutableList<String> = mutableListOf()
     private var sponsorsList: MutableList<String> = mutableListOf()
     private lateinit var collaboratorsAdapter: CompanyAdapter
     private lateinit var sponsorsAdapter: CompanyAdapter
+    private lateinit var speakersAdapter: SpeakerAdapter
 
     companion object {
         fun newInstance() = Speakers()
@@ -46,7 +58,7 @@ class Speakers : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SpeakersViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SpeakersViewModel::class.java)
         about_us_btn.setOnClickListener {
             navController.navigate(R.id.action_speakers_to_aboutUs)
         }
@@ -54,10 +66,14 @@ class Speakers : Fragment() {
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         val linearLayoutManager2 =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val linearLayoutManager3 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         collborators_recyclerView.layoutManager = linearLayoutManager
         sponsor_recycler.layoutManager = linearLayoutManager2
+        speakers_recyclerView.layoutManager = linearLayoutManager3
         inflateCollaborators()
         inflateSponsors()
+        fetchSpeakers()
     }
 
     private fun inflateCollaborators() {
@@ -75,6 +91,16 @@ class Speakers : Fragment() {
         }
         sponsorsAdapter = CompanyAdapter(sponsorsList)
         sponsor_recycler.adapter = sponsorsAdapter
+    }
+
+    private fun fetchSpeakers() = launch {
+        viewModel.fetchSpeakers()
+        viewModel.speakersList.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) {
+                speakersAdapter = SpeakerAdapter(it)
+                speakers_recyclerView.adapter = speakersAdapter
+            }
+        })
     }
 
 }
