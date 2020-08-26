@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="blue_accent">#0071CD</color>
+    <color name="google_btn_color">#4C8BF5</color>
     <color name="yellow_accent">#ffbd3b</color>
     <color name="red_accent">#ea3883</color>
     <color name="error_red">#d32f2f</color>

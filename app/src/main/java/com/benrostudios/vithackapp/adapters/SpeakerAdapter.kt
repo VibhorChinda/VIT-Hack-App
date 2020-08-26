@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Speaker
+import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.benrostudios.vithackapp.utils.shortToaster
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -58,6 +59,7 @@ class SpeakerAdapter(private val speakersList: List<Speaker>) :
             .circleCrop()
         Glide.with(mContext)
             .load(speakersList[position].imageUrl)
+            .placeholder(mContext.imagePlaceholder())
             .apply(options)
             .into(holder.speakerImage)
     }

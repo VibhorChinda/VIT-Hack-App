@@ -16,9 +16,7 @@ import com.benrostudios.vithackapp.ui.auth.userSetUp.UserSetup.Companion.NAME
 import com.benrostudios.vithackapp.ui.auth.userSetUp.UserSetup.Companion.REGISTRATION_NUMBER
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
-import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.benrostudios.vithackapp.utils.isValidPhone
-import com.benrostudios.vithackapp.utils.shortToaster
+import com.benrostudios.vithackapp.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.user_phone_fragment.*
 import kotlinx.android.synthetic.main.user_setup_fragment.*
@@ -51,13 +49,15 @@ class UserPhone : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(UserPhoneViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(UserPhoneViewModel::class.java)
         name = arguments?.getString(NAME).toString()
         institution = arguments?.getString(INSTITUTION_NAME).toString()
         registrationNumber = arguments?.getString(REGISTRATION_NUMBER).toString()
         phone_input.setSelection(4)
         phone_number_continue_btn.setOnClickListener {
             if (phone_input.isValidPhone()) {
+                phone_number_continue_btn.hide()
+                phone_progress.show()
                 createUser()
                 userListener()
             }
@@ -66,20 +66,31 @@ class UserPhone : ScopedFragment(), KodeinAware {
 
     private fun createUser() = launch {
         val uid: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        Log.d("PhoneFragment","User UID is :$uid")
-        val user = User(institution,sharedPrefUtils.getFCMToken() ?: "",sharedPrefUtils.getEmailId() ?: "",name,phone_input.text.toString(),registrationNumber,"",uid)
-        Log.d("PhoneFragment","User being upserted is : $user")
+        Log.d("PhoneFragment", "User UID is :$uid")
+        val user = User(
+            institution,
+            sharedPrefUtils.getFCMToken() ?: "",
+            sharedPrefUtils.getEmailId() ?: "",
+            name,
+            phone_input.text.toString(),
+            registrationNumber,
+            "",
+            uid
+        )
+        Log.d("PhoneFragment", "User being upserted is : $user")
         viewModel.userUpsert(user)
     }
 
     private fun userListener() = launch {
         viewModel.userUpsertStatus.observe(viewLifecycleOwner, Observer {
-            if(it){
+            if (it) {
                 requireActivity().shortToaster("User Created Successfully")
-                var intent = Intent(requireActivity(),HomeActivity::class.java)
+                var intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
-            }else{
+            } else {
+                phone_progress.hide()
+                phone_number_continue_btn.show()
                 requireActivity().shortToaster("Error Creating User")
             }
         })

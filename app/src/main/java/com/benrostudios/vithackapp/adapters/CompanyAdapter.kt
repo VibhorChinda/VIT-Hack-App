@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -29,6 +30,7 @@ class CompanyAdapter(private val companyItems: List<String>) :
         val companyLogo = storageReference.child(companyItems[position])
         Glide.with(mContext)
             .load(companyLogo)
+            .placeholder(mContext.imagePlaceholder())
             .into(holder.companyImage)
 
     }
