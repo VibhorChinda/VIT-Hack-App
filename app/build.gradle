@@ -87,5 +87,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
 
+    //Lottie
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
 
 }
