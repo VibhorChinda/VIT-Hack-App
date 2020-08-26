@@ -133,7 +133,7 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun updateUI() = launch {
         viewModel.checkUser(firebaseAuth.uid.toString())
-        viewModel.userChecker.observe(viewLifecycleOwner, Observer {
+        viewModel.userChecker.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 val intent = Intent(context, HomeActivity::class.java)
                 startActivity(intent)

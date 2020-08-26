@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +60,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             splash_progress.show()
             user_info_fetcher_display.show()
             viewModel.checkUser(firebaseAuth.uid.toString())
-            viewModel.checkerUser.observeForever {
+            viewModel.checkerUser.observe(this, EventObserver {
                 val navTruth = if (it) {
                     true
                 } else {
@@ -67,9 +68,10 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                     false
                 }
                 navigationHelper(navTruth)
-            }
+            })
         }
     }
+
 
     private fun navigationHelper(truth: Boolean) {
         //False = Auth , True = HomeActivity
@@ -77,6 +79,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             if (truth) {
                 Intent(this, HomeActivity::class.java)
             } else {
+                firebaseAuth.signOut()
                 Intent(this, AuthActivity::class.java)
             }
         startActivity(intent)
