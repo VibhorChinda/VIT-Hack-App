@@ -10,14 +10,25 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.vithackapp.utils.Event
+import com.benrostudios.vithackapp.utils.hide
+import com.benrostudios.vithackapp.utils.show
+import com.benrostudios.vithackapp.utils.successSnackBar
+import kotlinx.android.synthetic.main.activity_auth.*
 
 open class BaseActivity : AppCompatActivity() {
+    private var initOpen: Int = 0
 
     val networkState = MutableLiveData<Event<Boolean>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         networkManager()
+        val cm: ConnectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (cm.activeNetworkInfo == null) {
+            networkState.postValue(Event(false))
+            initOpen = 1
+        }
     }
 
 
@@ -30,10 +41,15 @@ open class BaseActivity : AppCompatActivity() {
             object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     Log.d("Base", "ONLINE")
-                    networkState.postValue(Event(true))
+                    if (initOpen != 0) {
+                        networkState.postValue(Event(true))
+                    } else {
+                        initOpen = 1
+                    }
                 }
 
                 override fun onLost(network: Network) {
+                    Log.d("Base", "Offline " + cm.activeNetwork)
                     if (cm.activeNetwork == null) {
                         Log.d("Base", "OFFLINE")
                         networkState.postValue(Event(false))

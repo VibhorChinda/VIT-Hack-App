@@ -8,19 +8,6 @@
     tools:context=".ui.auth.AuthActivity">
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:visibility="gone"
-        android:id="@+id/no_connection_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment_auth_activity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment_auth_activity"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/rex" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_auth_activity"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -31,6 +18,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph_authentication" />
+        app:navGraph="@navigation/nav_graph_authentication">
+
+    </androidx.fragment.app.FragmentContainerView>
+
+    <WebView
+        android:visibility="gone"
+        android:id="@+id/game_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
