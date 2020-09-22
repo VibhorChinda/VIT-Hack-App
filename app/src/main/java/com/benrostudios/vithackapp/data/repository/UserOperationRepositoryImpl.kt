@@ -1,6 +1,7 @@
 package com.benrostudios.vithackapp.data.repository
 
 import android.util.EventLog
+import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.vithackapp.data.models.User
@@ -47,17 +48,19 @@ class UserOperationRepositoryImpl : UserOperationRepository {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val user: User? = snapshot.getValue(User::class.java)
                     user.let {
                         _fetchedUser.postValue(it)
                     }
+                }else{
+                    _fetchedUser.postValue(User())
                 }
             }
 
         }
+        databaseReference.addListenerForSingleValueEvent(userFetcher)
     }
 
 
