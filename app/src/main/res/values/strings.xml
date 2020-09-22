@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VITHackApp</string>
+    <string name="app_name">VIT Hack</string>
     <string name="sign_up_title">Sign Up</string>
     <string name="email_title">Email ID</string>
     <string name="password_title">Password</string>
@@ -83,7 +83,7 @@
     <string name="problem_statement_text">Domains</string>
 
     //Profile
-    <string name="vit_hack_text">VITHack\'2020</string>
+    <string name="vit_hack_text">VITHack 2020</string>
     <string name="whats_up_text">What\'s up</string>
     <string name="are_you_enjoying">Are you enjoying VITHack?</string>
     <string name="your_name_text">Your Name</string>
