@@ -1,6 +1,7 @@
 package com.benrostudios.vithackapp.data.repository
 
 import android.util.EventLog
+import android.util.Log
 import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,6 +49,7 @@ class UserOperationRepositoryImpl : UserOperationRepository {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val user: User? = snapshot.getValue(User::class.java)
@@ -66,6 +68,14 @@ class UserOperationRepositoryImpl : UserOperationRepository {
 
     override val fetchedUser: LiveData<User>
         get() = _fetchedUser
+
+    override fun updateFcmToken(token: String, uid: String) {
+        Firebase.database.getReference("/users/$uid").child("token").setValue(token)
+            .addOnFailureListener {
+                Log.d("tokenUpdate", "$it")
+            }
+    }
+
     override val userCheckStatus: LiveData<Event<Boolean>>
         get() = _checkUserStatus
     override val upsertUserStatus: LiveData<Boolean>

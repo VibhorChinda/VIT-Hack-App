@@ -7,10 +7,15 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.benrostudios.vithackapp.ui.splash.SplashActivity
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -19,15 +24,19 @@ class FirebaseNotifications : FirebaseMessagingService() {
     private var mNotificationManager: NotificationManager? = null
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        val data: Map<String, String> = remoteMessage.data
-        Log.d(TAG, "onMessageReceived: ")
+        var title: String = ""
+        var body: String = ""
+        remoteMessage.notification?.let {
+            title = it.title.toString()
+            body = it.body.toString()
+        }
         val intent = Intent(this, SplashActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, "0")
-            .setContentTitle(data["title"])
-            .setContentText(data["body"])
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setSmallIcon(R.drawable.ic_stat_name)
             .setPriority(Notification.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
@@ -53,7 +62,11 @@ class FirebaseNotifications : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
-        //UpdateToken
+        val uid = FirebaseAuth.getInstance().uid
+        Firebase.database.getReference("/users/$uid").child("token").setValue(token)
+            .addOnFailureListener {
+                Log.d("tokenUpdate", "$it")
+            }
     }
 
     companion object {

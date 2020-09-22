@@ -11,4 +11,5 @@ interface UserOperationRepository {
     val userCheckStatus: LiveData<Event<Boolean>>
     val upsertUserStatus: LiveData<Boolean>
     val fetchedUser : LiveData<User>
+    fun updateFcmToken(token: String, uid: String)
 }
