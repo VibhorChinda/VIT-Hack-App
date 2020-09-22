@@ -1,17 +1,20 @@
 package com.benrostudios.vithackapp.ui.home.profile
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.avatarfirst.avatargenlib.AvatarConstants
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.home.HomeActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
@@ -50,16 +53,18 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
         // TODO: Use the ViewModel
-        d("lol", "hello")
         fetchUser()
         userListener()
-
         profiile_logout_button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             sharedPrefUtils.nuke()
             val intent = Intent(requireActivity(), SplashActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
+        }
+        dark_mode_switch.isChecked = !sharedPrefUtils.getUiMode()
+        dark_mode_switch.setOnClickListener {
+            (activity as HomeActivity).switchUiMode()
         }
     }
 

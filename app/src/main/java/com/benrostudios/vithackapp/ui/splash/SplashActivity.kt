@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
@@ -32,6 +33,12 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
 
     private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
+        val uiMode = sharedPrefUtils.getUiMode()
+        if(uiMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)

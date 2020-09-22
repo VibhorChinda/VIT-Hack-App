@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.AssetManager
 import android.os.Bundle
 import android.webkit.WebSettings
+import androidx.appcompat.app.AppCompatDelegate
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.BaseActivity
 import com.benrostudios.vithackapp.utils.EventObserver
