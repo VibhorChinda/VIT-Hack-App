@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.avatarfirst.avatargenlib.AvatarConstants
+import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -59,6 +62,9 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
     private fun userListener(){
         viewModel.fetchedUser.observe(viewLifecycleOwner, Observer {
             if(it != null){
+                Glide.with(this)
+                    .load(AvatarGenerator.avatarImage(requireActivity(), 200, AvatarConstants.CIRCLE, it.name, AvatarConstants.COLOR400))
+                    .into(user_profile_photo)
                 user_full_name_profile_screen.text = it.name
                 user_email_address_profile_screen.text = it.mail
                 user_institute_name_profile_screen.text = it.collegeName

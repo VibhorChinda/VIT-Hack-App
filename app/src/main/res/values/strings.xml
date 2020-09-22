@@ -107,6 +107,11 @@
     <string name="Faq">Faq</string>
     <string name="profile">Profile</string>
 
+
+    //Notification
+    <string name="notification_channel_name">VIT Hack Updates</string>
+    <string name="notification_channel_disp">Updates</string>
+
     //On Boarding
     <string name="welcome_to_text">WELCOME TO</string>
     <string name="vit_hack">VIT HACK</string>

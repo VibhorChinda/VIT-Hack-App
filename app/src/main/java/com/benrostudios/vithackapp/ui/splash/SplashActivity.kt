@@ -13,7 +13,9 @@ import com.benrostudios.vithackapp.ui.home.HomeActivity
 import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -45,7 +47,20 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_splash)
-        userChecker()
+        if (sharedPrefUtils.getFirstTimeOpen()) {
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@OnCompleteListener
+                    }
+                    val token = task.result?.token
+                    if (token != null) {
+                        sharedPrefUtils.setFCMToken(token)
+                    }
+                    userChecker()
+                })
+        }
+
     }
 
     private fun userChecker() {
@@ -82,8 +97,8 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                 firebaseAuth.signOut()
                 Intent(this, AuthActivity::class.java)
             }
-        startActivity(intent)
         sharedPrefUtils.setFirstTimeOpen(false)
+        startActivity(intent)
         finish()
     }
 }

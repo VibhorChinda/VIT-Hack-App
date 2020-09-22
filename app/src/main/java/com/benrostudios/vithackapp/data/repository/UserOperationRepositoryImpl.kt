@@ -54,7 +54,7 @@ class UserOperationRepositoryImpl : UserOperationRepository {
                     user.let {
                         _fetchedUser.postValue(it)
                     }
-                }else{
+                } else {
                     _fetchedUser.postValue(User())
                 }
             }
