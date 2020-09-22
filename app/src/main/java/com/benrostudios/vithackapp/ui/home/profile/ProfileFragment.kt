@@ -1,5 +1,6 @@
 package com.benrostudios.vithackapp.ui.home.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import com.avatarfirst.avatargenlib.AvatarConstants
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.splash.SplashActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
+import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -27,6 +30,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: SplashActivityViewModelFactory by instance()
+    private val sharedPrefUtils: SharedPrefUtils by instance()
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -43,27 +47,40 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(SplashActivityViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
         // TODO: Use the ViewModel
-        d("lol","hello")
+        d("lol", "hello")
         fetchUser()
         userListener()
 
         profiile_logout_button.setOnClickListener {
-
+            FirebaseAuth.getInstance().signOut()
+            sharedPrefUtils.nuke()
+            val intent = Intent(requireActivity(), SplashActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
-    private fun fetchUser() = launch{
+    private fun fetchUser() = launch {
         val uid = FirebaseAuth.getInstance().uid
         viewModel.fetchUser(uid!!)
     }
 
-    private fun userListener(){
+    private fun userListener() {
         viewModel.fetchedUser.observe(viewLifecycleOwner, Observer {
-            if(it != null){
+            if (it != null) {
                 Glide.with(this)
-                    .load(AvatarGenerator.avatarImage(requireActivity(), 200, AvatarConstants.CIRCLE, it.name, AvatarConstants.COLOR400))
+                    .load(
+                        AvatarGenerator.avatarImage(
+                            requireActivity(),
+                            200,
+                            AvatarConstants.CIRCLE,
+                            it.name,
+                            AvatarConstants.COLOR400
+                        )
+                    )
                     .into(user_profile_photo)
                 user_full_name_profile_screen.text = it.name
                 user_email_address_profile_screen.text = it.mail

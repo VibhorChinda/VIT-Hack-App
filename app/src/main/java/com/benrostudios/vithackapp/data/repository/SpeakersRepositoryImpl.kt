@@ -1,5 +1,6 @@
 package com.benrostudios.vithackapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.vithackapp.data.models.Speaker
@@ -16,7 +17,7 @@ class SpeakersRepositoryImpl : SpeakersRepository {
         databaseReference = Firebase.database.getReference("/speakers")
         val speakerFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("DatabaseCancelled","Speakers Cancelled")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {

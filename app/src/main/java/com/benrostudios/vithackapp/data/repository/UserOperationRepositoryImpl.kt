@@ -47,7 +47,7 @@ class UserOperationRepositoryImpl : UserOperationRepository {
         databaseReference = Firebase.database.getReference("/users/$uid")
         val userFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("DatabaseCancelled","User Cancelled")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {

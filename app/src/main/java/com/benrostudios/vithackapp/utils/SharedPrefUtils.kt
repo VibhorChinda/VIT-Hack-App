@@ -38,4 +38,8 @@ class SharedPrefUtils(
 
     fun getFirstTimeOpen(): Boolean =
         sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, true)
+
+    fun nuke() {
+        editor.clear()
+    }
 }
