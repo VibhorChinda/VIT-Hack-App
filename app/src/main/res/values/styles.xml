@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/blue_accent</item>
         <item name="android:fontFamily">@font/lato_regular</item>
         <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:windowBackground">@color/window_background</item>
         <item name="searchViewStyle">@style/SearchViewStyle</item>
         <item name="cardViewStyle">@style/CardViewCustomStyle</item>
     </style>

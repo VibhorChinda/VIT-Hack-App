@@ -3,17 +3,12 @@ package com.benrostudios.vithackapp.ui.base
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.vithackapp.utils.Event
-import com.benrostudios.vithackapp.utils.hide
-import com.benrostudios.vithackapp.utils.show
-import com.benrostudios.vithackapp.utils.successSnackBar
-import kotlinx.android.synthetic.main.activity_auth.*
 
 open class BaseActivity : AppCompatActivity() {
     private var initOpen: Int = 0

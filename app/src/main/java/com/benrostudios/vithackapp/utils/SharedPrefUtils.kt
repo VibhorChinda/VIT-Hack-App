@@ -51,6 +51,6 @@ class SharedPrefUtils(
 
 
     fun nuke() {
-        editor.clear()
+        editor.clear().commit()
     }
 }

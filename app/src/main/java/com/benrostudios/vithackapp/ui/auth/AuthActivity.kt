@@ -2,8 +2,11 @@ package com.benrostudios.vithackapp.ui.auth
 
 import android.annotation.SuppressLint
 import android.content.res.AssetManager
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log.d
 import android.webkit.WebSettings
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.BaseActivity
@@ -26,7 +29,6 @@ class AuthActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
         networkState.observe(this, EventObserver {
             if (it) {
                     game_web_view.hide()

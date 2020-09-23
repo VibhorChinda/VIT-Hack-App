@@ -28,6 +28,7 @@ class TimelineRepositoryImpl : TimelineRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()) {
+                    timelineList = mutableListOf()
                     for(x in snapshot.children) {
                         val timelineObj = x.getValue(TimeLine :: class.java)
                         timelineObj?.let {
