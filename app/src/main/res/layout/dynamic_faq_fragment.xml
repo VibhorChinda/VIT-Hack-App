@@ -15,6 +15,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/lato_bold"
+        android:textColor="#000"
         android:text="@string/ask_a_ques"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,7 @@
             android:id="@+id/dynamic_faq_question_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000"
             android:maxLength="100"
             android:maxLines="2" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/about_us_bottom_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#70E5E5E5"
+    android:fillViewport="true"
     tools:context=".ui.home.aboutus.AboutUs">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/team_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
+        android:background="@color/about_us_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView50"
-        app:layout_constraintVertical_bias="0.748" />
+        app:layout_constraintTop_toBottomOf="@+id/textView50">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/team_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView50"
+            tools:listitem="@layout/about_us_item" />
+
+
 
     <TextView
         android:id="@+id/textView48"
@@ -54,4 +63,5 @@
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="@+id/textView49"
         app:layout_constraintTop_toBottomOf="@+id/textView49" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

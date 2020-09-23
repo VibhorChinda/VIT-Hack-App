@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="blue_accent">#0071CD</color>
+    <color name="google_btn_color">#4C8BF5</color>
     <color name="yellow_accent">#ffbd3b</color>
     <color name="red_accent">#ea3883</color>
     <color name="error_red">#d32f2f</color>
@@ -12,4 +13,13 @@
     <color name="grey_accent">#2C2C2C</color>
     <color name="dark_grey_accent">#595959</color>
     <color name="light_blue_accent">#ADDAFF</color>
+    <color name="primary_text_color">#000</color>
+    <color name="secondary_text_color">#000</color>
+    <color name="login_button_color">#2C2C2C</color>
+    <color name="card_background_color">#FFF</color>
+    <color name="profile_sheet_background">#ADDAFF</color>
+    <color name="profile_sheet_text_color">#595959</color>
+    <color name="about_us_background">#70E5E5E5</color>
+    <color name="window_background">#FFF</color>
+    <color name="about_us_circle">#FFF</color>
 </resources>

@@ -11,6 +11,7 @@ import com.benrostudios.vithackapp.adapters.TeamAdapter
 import com.benrostudios.vithackapp.data.premade.devData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.about_us_item.*

@@ -47,6 +47,8 @@ class Faq : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(FaqViewModel::class.java)
         faq_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        faq_recyclerView.hide()
+        faq_progress.show()
         fetchFaq()
         ask_faq_btn.setOnClickListener {
             val dialogFragment = DynamicFaq()
@@ -59,6 +61,8 @@ class Faq : ScopedFragment(), KodeinAware {
         viewModel.fetchFaqs()
         viewModel.fetchedFaqs.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
+                faq_progress.hide()
+                faq_recyclerView.show()
                 adapter = FaqAdapter(it)
                 faq_recyclerView.adapter = adapter
             }

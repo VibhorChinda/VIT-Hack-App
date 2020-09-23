@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VITHackApp</string>
+    <string name="app_name">VIT Hack</string>
     <string name="sign_up_title">Sign Up</string>
     <string name="email_title">Email ID</string>
     <string name="password_title">Password</string>
@@ -18,6 +18,7 @@
     //Welcome
     <string name="welcome_sub">How would you like to Sign Up?</string>
     <string name="sign_up_now">Sign Up Now</string>
+    <string name="continue_with_email">Continue With Email</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="login">Login</string>
@@ -48,7 +49,7 @@
     <string name="your_name">Your Name</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="institution_name">Institution\'s Name</string>
-    <string name="enter_institution_name">Your Name</string>
+    <string name="enter_institution_name">Your Institution\'s Name</string>
     <string name="reg_no">Registration Number</string>
     <string name="enter_reg_no">Enter your Registration Number</string>
 
@@ -79,10 +80,10 @@
     <string name="domain_text">Domains</string>
 
     //ProblemStatement
-    <string name="problem_statement_text">Problem Statement</string>
+    <string name="problem_statement_text">Domains</string>
 
     //Profile
-    <string name="vit_hack_text">VITHack\'2020</string>
+    <string name="vit_hack_text">VITHack 2020</string>
     <string name="whats_up_text">What\'s up</string>
     <string name="are_you_enjoying">Are you enjoying VITHack?</string>
     <string name="your_name_text">Your Name</string>
@@ -105,6 +106,11 @@
     <string name="speakers">Speakers</string>
     <string name="Faq">Faq</string>
     <string name="profile">Profile</string>
+
+
+    //Notification
+    <string name="notification_channel_name">VIT Hack Updates</string>
+    <string name="notification_channel_disp">Updates</string>
 
     //On Boarding
     <string name="welcome_to_text">WELCOME TO</string>

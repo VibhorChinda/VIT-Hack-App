@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="blue_accent">#0071CD</color>
+    <color name="google_btn_color">#4C8BF5</color>
+    <color name="yellow_accent">#ffbd3b</color>
+    <color name="red_accent">#ea3883</color>
+    <color name="error_red">#d32f2f</color>
+    <color name="success_green">#4caf50</color>
+    <color name="green_accent">#bde321</color>
+    <color name="grey_accent">#121212</color>
+    <color name="dark_grey_accent">#595959</color>
+    <color name="light_blue_accent">#ADDAFF</color>
+    <color name="primary_text_color">#FFF</color>
+    <color name="secondary_text_color">#FFF</color>
+    <color name="login_button_color">#0071CD</color>
+    <color name="card_background_color">#1B1B1B</color>
+    <color name="profile_sheet_background">#121212</color>
+    <color name="profile_sheet_text_color">#FFF</color>
+    <color name="about_us_background">#121212</color>
+    <color name="window_background">#121212</color>
+    <color name="about_us_circle">#1B1B1B</color>
+</resources>

@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -29,6 +33,12 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
 
     private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
+        val uiMode = sharedPrefUtils.getUiMode()
+        if(uiMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
@@ -44,7 +54,20 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_splash)
-        userChecker()
+        if (sharedPrefUtils.getFirstTimeOpen()) {
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@OnCompleteListener
+                    }
+                    val token = task.result?.token
+                    if (token != null) {
+                        sharedPrefUtils.setFCMToken(token)
+                    }
+                    userChecker()
+                })
+        }
+
     }
 
     private fun userChecker() {
@@ -59,7 +82,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             splash_progress.show()
             user_info_fetcher_display.show()
             viewModel.checkUser(firebaseAuth.uid.toString())
-            viewModel.checkerUser.observeForever {
+            viewModel.checkerUser.observe(this, EventObserver {
                 val navTruth = if (it) {
                     true
                 } else {
@@ -67,9 +90,10 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                     false
                 }
                 navigationHelper(navTruth)
-            }
+            })
         }
     }
+
 
     private fun navigationHelper(truth: Boolean) {
         //False = Auth , True = HomeActivity
@@ -77,10 +101,11 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             if (truth) {
                 Intent(this, HomeActivity::class.java)
             } else {
+                firebaseAuth.signOut()
                 Intent(this, AuthActivity::class.java)
             }
-        startActivity(intent)
         sharedPrefUtils.setFirstTimeOpen(false)
+        startActivity(intent)
         finish()
     }
 }

@@ -1,20 +1,27 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/blue_accent</item>
         <item name="colorPrimaryDark">@color/grey_accent</item>
         <item name="colorAccent">@color/blue_accent</item>
         <item name="android:fontFamily">@font/lato_regular</item>
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:windowBackground">@color/window_background</item>
         <item name="searchViewStyle">@style/SearchViewStyle</item>
+        <item name="cardViewStyle">@style/CardViewCustomStyle</item>
+    </style>
+
+    <style name="CardViewCustomStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background_color</item>
     </style>
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">#000</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
+
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="searchIcon">@drawable/ic_baseline_search_24</item>
         <item name="hintTextColor">@color/blue_accent</item>

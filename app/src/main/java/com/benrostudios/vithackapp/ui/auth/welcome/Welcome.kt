@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -111,7 +112,7 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun signInWithGoogle(account: GoogleSignInAccount) = launch {
         viewModel.firebaseCreateWithGoogle(account)
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.response.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 welcome_container.successSnackBar("Successful Authentication!")
                 welcome_progress_text.text = resources.getString(R.string.fetching_user_info)
@@ -133,7 +134,7 @@ class Welcome : ScopedFragment(), KodeinAware {
 
     private fun updateUI() = launch {
         viewModel.checkUser(firebaseAuth.uid.toString())
-        viewModel.userChecker.observe(viewLifecycleOwner, Observer {
+        viewModel.userChecker.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 val intent = Intent(context, HomeActivity::class.java)
                 startActivity(intent)

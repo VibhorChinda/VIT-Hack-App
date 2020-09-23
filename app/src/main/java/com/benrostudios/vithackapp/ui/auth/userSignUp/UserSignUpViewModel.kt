@@ -9,13 +9,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 class UserSignUpViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    val response = MutableLiveData<Boolean>()
 
-    init {
-        authRepository.getAuthStatus.observeForever {
-            response.postValue(it)
-        }
-    }
+    val response
+        get() = authRepository.getAuthStatus
 
     suspend fun firebaseCreateWithEmailPassword(email: String, password: String) {
         authRepository.firebaseCreateWithEmailPassword(email, password)

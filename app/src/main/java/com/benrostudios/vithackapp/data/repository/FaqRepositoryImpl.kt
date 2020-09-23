@@ -1,5 +1,6 @@
 package com.benrostudios.vithackapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.vithackapp.data.models.FAQ
@@ -22,7 +23,7 @@ class FaqRepositoryImpl : FaqRepository {
         databaseReference = Firebase.database.getReference("/FAQs")
         val faqFetcher = object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("DatabaseCancelled","FAQ Cancelled")
             }
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){

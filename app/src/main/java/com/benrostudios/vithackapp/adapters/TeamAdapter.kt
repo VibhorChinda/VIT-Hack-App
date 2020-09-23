@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Developer
+import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -19,22 +20,25 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.about_us_item.*
 import kotlinx.android.synthetic.main.about_us_item.view.*
 
-class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
+class TeamAdapter(private val devData: List<Developer>) :
+    RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
 
 
     private lateinit var mContext: Context
-    class TeamViewHolder(v: View): RecyclerView.ViewHolder(v){
+
+    class TeamViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val name: TextView = v.about_us_dev_name
         val post: TextView = v.about_us_dev_post
         val github: ImageView = v.about_us_dev_github
         val linkedIn: ImageView = v.about_us_dev_linked_in
-        val email:ImageView = v.about_us_email_id
+        val email: ImageView = v.about_us_email_id
         val devImage: ImageView = v.dev_image
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         mContext = parent.context
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.about_us_item,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.about_us_item, parent, false)
         return TeamViewHolder(view)
     }
 
@@ -48,26 +52,27 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
 
         Glide.with(mContext)
             .load(devPictureTest)
+            .placeholder(mContext.imagePlaceholder())
             .apply(options)
             .into(holder.devImage)
 
         holder.name.text = devData[position].name
         holder.post.text = devData[position].post
-        if(devData[position].githubLink.isBlank()){
+        if (devData[position].githubLink.isBlank()) {
             holder.github.setImageDrawable(mContext.getDrawable(R.drawable.ic_dribbble_circle_filled))
             holder.github.setOnClickListener {
                 openLink(devData[position].dribbleLink)
             }
-        }else{
+        } else {
             holder.github.setOnClickListener {
                 openLink(devData[position].githubLink)
             }
         }
-        if(devData[position].instagramLink.isBlank()){
+        if (devData[position].instagramLink.isBlank()) {
             holder.email.setOnClickListener {
                 openLink(devData[position].linkedInLink)
             }
-        }else{
+        } else {
             holder.email.setImageDrawable(mContext.getDrawable(R.drawable.ic_instagram_filled))
             holder.email.setOnClickListener {
                 openLink(devData[position].instagramLink)
@@ -77,7 +82,8 @@ class TeamAdapter(private val devData: List<Developer>): RecyclerView.Adapter<Te
             openLink(devData[position].linkedInLink)
         }
     }
-    private fun openLink(link: String){
+
+    private fun openLink(link: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(link)
         mContext.startActivity(intent)

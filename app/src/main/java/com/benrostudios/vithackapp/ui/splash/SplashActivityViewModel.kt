@@ -11,10 +11,15 @@ class SplashActivityViewModel(
 ): ViewModel() {
     val checkerUser
         get() = userOperationRepository.userCheckStatus
+    val fetchedUser
+        get() = userOperationRepository.fetchedUser
 
     fun checkUser(uid: String){
         viewModelScope.launch(Dispatchers.IO){
             userOperationRepository.checkUser(uid)
         }
+    }
+    suspend fun fetchUser(uid: String){
+        userOperationRepository.fetchUser(uid)
     }
 }
