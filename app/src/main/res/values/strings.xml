@@ -112,6 +112,9 @@
     <string name="notification_channel_name">VIT Hack Updates</string>
     <string name="notification_channel_disp">Updates</string>
 
+    //Domain
+    <string name="show_more">Show More</string>
+
     //On Boarding
     <string name="welcome_to_text">WELCOME TO</string>
     <string name="vit_hack">VIT HACK</string>
