@@ -17,6 +17,11 @@
         <item name="cardBackgroundColor">@color/card_background_color</item>
     </style>
 
+    <style name="ProgressDialogTheme" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">#000</item>
         <item name="boxStrokeWidth">2dp</item>

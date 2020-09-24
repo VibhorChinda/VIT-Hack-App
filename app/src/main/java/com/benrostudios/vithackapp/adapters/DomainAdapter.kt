@@ -12,6 +12,7 @@ import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Domain
+import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.domain_item.view.*
 
@@ -42,6 +43,7 @@ class DomainAdapter(private val domainsList: List<Domain>) :
         holder.shortDesc.text = domainsList[position].description
         Glide.with(mContext)
             .load(domainsList[position].icon)
+            .placeholder(mContext.imagePlaceholder())
             .into(holder.image)
         holder.container.setCardBackgroundColor(domainsList[position].colour.toColorInt())
 

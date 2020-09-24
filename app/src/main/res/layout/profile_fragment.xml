@@ -7,6 +7,18 @@
     android:background="@color/profile_sheet_background"
     tools:context=".ui.home.profile.ProfileFragment">
 
+    <ProgressBar
+        android:visibility="invisible"
+        android:elevation="50dp"
+        android:id="@+id/profile_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
@@ -47,7 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/lato_bold"
-                android:text="Vibhor Chinda"
+                android:text=""
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -76,7 +88,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/lato_bold"
-                android:text="vibhorchinda@gmail.com"
+                android:text=""
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -105,7 +117,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/lato_bold"
-                android:text="Vellore Institute of Technology"
+                android:text=""
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -134,7 +146,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/lato_bold"
-                android:text="18BIT0284"
+                android:text=""
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -184,6 +196,7 @@
                 android:orientation="horizontal"
                 android:visibility="gone"
                 app:layout_constraintGuide_begin="60dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -218,7 +231,7 @@
         android:layout_height="120dp"
         android:layout_marginTop="42dp"
         android:elevation="16dp"
-        android:tint="@color/blue_accent"
+        app:tint="@color/blue_accent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
@@ -274,7 +287,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/lato_bold"
-        android:text="Sparsh"
+        android:text=""
         android:textColor="@color/profile_sheet_text_color"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
