@@ -1,17 +1,12 @@
 package com.benrostudios.vithackapp.ui.home.profile
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.avatarfirst.avatargenlib.AvatarConstants
-import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
 import com.benrostudios.vithackapp.ui.home.HomeActivity
@@ -19,9 +14,7 @@ import com.benrostudios.vithackapp.ui.splash.SplashActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -52,7 +45,6 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
-        // TODO: Use the ViewModel
         fetchUser()
         userListener()
         profiile_logout_button.setOnClickListener {

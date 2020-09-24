@@ -1,6 +1,7 @@
 package com.benrostudios.vithackapp.ui.splash
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.home.HomeActivity
-import com.benrostudios.vithackapp.ui.onBoarding.OnboardingActivity
+import com.benrostudios.vithackapp.ui.onBoarding.OnBoardingActivity
 import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
@@ -33,12 +34,20 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
 
     private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
-        val uiMode = sharedPrefUtils.getUiMode()
-        if (uiMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        if(sharedPrefUtils.getFirstTimeOpen()){
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_NO -> {sharedPrefUtils.setUiMode(true)}
+                Configuration.UI_MODE_NIGHT_YES -> {sharedPrefUtils.setUiMode(false)}
+            }
+        }else{
+            val uiMode = sharedPrefUtils.getUiMode()
+            if (uiMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
         }
+
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
@@ -58,7 +67,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             Handler().postDelayed(
                 {
                     sharedPrefUtils.setFirstTimeOpen(false)
-                    startActivity(Intent(this, OnboardingActivity::class.java))
+                    startActivity(Intent(this, OnBoardingActivity::class.java))
                     finish()
                 }, SPLASH_TIME_OUT
             )

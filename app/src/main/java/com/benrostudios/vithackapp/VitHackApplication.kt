@@ -1,7 +1,6 @@
 package com.benrostudios.vithackapp
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.data.repository.*
 import com.benrostudios.vithackapp.ui.auth.userPhone.UserPhoneViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignInViewModelFactory

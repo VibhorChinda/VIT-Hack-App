@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
 
-class OnboardingActivity : AppCompatActivity() {
+class OnBoardingActivity : AppCompatActivity() {
 
     private var currentPos = 0
     private lateinit var runnable: Runnable
@@ -28,7 +28,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun initializeUi() {
         val viewPager = vp_photos_viewpager as ViewPager2
-        val adapter = OnboardingAdapter(this@OnboardingActivity)
+        val adapter = OnboardingAdapter(this@OnBoardingActivity)
         viewPager.adapter = adapter
         TabLayoutMediator(tl_tab_layout, viewPager) { _, _ ->
             //Some implementation
@@ -49,7 +49,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
 
-    class OnboardingAdapter(val activity: OnboardingActivity) :
+    class OnboardingAdapter(val activity: OnBoardingActivity) :
     FragmentStateAdapter(activity) {
 
         private val descriptionList = listOf(activity.resources.getStringArray(R.array.on_boarding_array))[0]
