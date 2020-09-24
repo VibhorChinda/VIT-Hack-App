@@ -23,4 +23,5 @@
     <color name="about_us_background">#121212</color>
     <color name="window_background">#121212</color>
     <color name="about_us_circle">#1B1B1B</color>
+    <color name="splash_background">#121212</color>
 </resources>

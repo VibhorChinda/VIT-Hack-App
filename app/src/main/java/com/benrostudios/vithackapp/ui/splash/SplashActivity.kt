@@ -37,6 +37,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private val viewModelFactory: SplashActivityViewModelFactory by instance()
     private lateinit var viewModel: SplashActivityViewModel
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var isDark = false
 
     private val SPLASH_TIME_OUT = 3000L
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,8 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_NO -> {
                     sharedPrefUtils.setUiMode(true)
+                    isDark = true
+
                 }
                 Configuration.UI_MODE_NIGHT_YES -> {
                     sharedPrefUtils.setUiMode(false)
@@ -55,6 +58,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                isDark = true
             }
         }
         super.onCreate(savedInstanceState)
@@ -71,9 +75,13 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         );
         setContentView(R.layout.activity_splash)
         val splashImageView = iv_splash
+        val imageRes = when (isDark) {
+            true -> R.drawable.vithack_animation_dark
+            else -> R.drawable.vithack_animation
+        }
         Glide.with(this)
             .asGif()
-            .load(R.drawable.vithack_animation)
+            .load(imageRes)
             .listener(object : RequestListener<GifDrawable> {
                 override fun onLoadFailed(
                     e: GlideException?,

@@ -25,4 +25,5 @@
     <color name="about_us_background">#70E5E5E5</color>
     <color name="window_background">#FFF</color>
     <color name="about_us_circle">#FFF</color>
+    <color name="splash_background">#FFFFFF</color>
 </resources>
