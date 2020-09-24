@@ -45,17 +45,19 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_NO -> {
                     sharedPrefUtils.setUiMode(true)
-                    isDark = true
+                    isDark = false
 
                 }
                 Configuration.UI_MODE_NIGHT_YES -> {
                     sharedPrefUtils.setUiMode(false)
+                    isDark = true
                 }
             }
         } else {
             val uiMode = sharedPrefUtils.getUiMode()
             if (uiMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                isDark = false
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 isDark = true
