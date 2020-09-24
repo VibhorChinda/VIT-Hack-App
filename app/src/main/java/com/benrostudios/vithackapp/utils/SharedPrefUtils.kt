@@ -35,7 +35,7 @@ class SharedPrefUtils(
     fun getFCMToken(): String? = sharedPreferences.getString(SHARED_PREFERENCE_FCM_TOKEN, "")
 
     fun setFirstTimeOpen(truth: Boolean) {
-        editor.putBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, truth)
+        editor.putBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, truth).commit()
     }
 
     fun getFirstTimeOpen(): Boolean =

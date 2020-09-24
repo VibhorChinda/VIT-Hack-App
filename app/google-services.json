@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "36466225678-i80f79pjnbtam7q8bkjn0el3dvulv0g7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.benrostudios.vithackapp",
+            "certificate_hash": "ad8555ee55d30994eb83d8b6f944ca056473e642"
+          }
+        },
+        {
+          "client_id": "36466225678-sjkcc0vihsgdtg88kj8n6dc02cfe7h1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.benrostudios.vithackapp",
+            "certificate_hash": "f5bfde4bba2d981bb9752925b2a25eade82144b9"
+          }
+        },
+        {
           "client_id": "36466225678-6ab9pr5s3optmvfqp91pb82mkrhi7quq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -32,10 +48,46 @@
               "client_type": 3
             },
             {
-              "client_id": "36466225678-fdqpl2fja04obj2mngusceafe899ntm5.apps.googleusercontent.com",
+              "client_id": "36466225678-htq8bdrg0etbjua85e5up8s98lt8ju79.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.vithack.VIT-Hack"
+                "bundle_id": "com.vithack.Clip"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36466225678:android:fb4b42b5d81e6e9e98825f",
+        "android_client_info": {
+          "package_name": "com.example.vithackadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36466225678-6ab9pr5s3optmvfqp91pb82mkrhi7quq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcLiIimjSShg0quaqj1nGHOBbAMQMOznY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36466225678-6ab9pr5s3optmvfqp91pb82mkrhi7quq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36466225678-htq8bdrg0etbjua85e5up8s98lt8ju79.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vithack.Clip"
               }
             }
           ]

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.benrostudios.vithackapp.ui.home.HomeActivity
+import com.benrostudios.vithackapp.ui.onBoarding.OnboardingActivity
 import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
@@ -30,13 +31,12 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private lateinit var viewModel: SplashActivityViewModel
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-
     private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
         val uiMode = sharedPrefUtils.getUiMode()
-        if(uiMode){
+        if (uiMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
         super.onCreate(savedInstanceState)
@@ -55,6 +55,14 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         );
         setContentView(R.layout.activity_splash)
         if (sharedPrefUtils.getFirstTimeOpen()) {
+            Handler().postDelayed(
+                {
+                    sharedPrefUtils.setFirstTimeOpen(false)
+                    startActivity(Intent(this, OnboardingActivity::class.java))
+                    finish()
+                }, SPLASH_TIME_OUT
+            )
+        } else {
             FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {

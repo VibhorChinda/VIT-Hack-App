@@ -36,8 +36,8 @@ class CompanyAdapter(private val companyItems: List<String>) :
     }
 
     override fun getItemCount(): Int = companyItems.size
-
     class CompanyViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val companyImage: ImageView = v.company_image_item
     }
+
 }

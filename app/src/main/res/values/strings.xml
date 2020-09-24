@@ -112,11 +112,17 @@
     <string name="notification_channel_name">VIT Hack Updates</string>
     <string name="notification_channel_disp">Updates</string>
 
+    //Domain
+    <string name="show_more">Show More</string>
+
     //On Boarding
-    <string name="welcome_to_text">WELCOME TO</string>
+    <string name="welcome_to_text">Welcome to</string>
     <string name="vit_hack">VIT HACK</string>
-    <string name="on_boarding_text_1"> The hackathon will be focusing on the feasibility, application, resourcefulness and fundability of each project idea presented by the participant</string>
-    <string name="on_boarding_text_2">Real-world problem statement aimed towards challenging yout abilities and tons more is in store for you</string>
-    <string name="on_boarding_text_3">VITHack isa 36-Hur hackathon spread over the course of 3 days. Participants are continually encouraged to network with industry professionals in this confluence of knowledge and ideas</string>
-    <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At turpis nam purus aliquet lectus sollicitudin tortor</string>
+    <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string-array name="on_boarding_array">
+        <item>The hackathon will be focusing on the feasibility, application, resourcefulness and fundability of each project idea presented by the participant</item>
+        <item>Real-world problem statement aimed towards challenging your abilities and tons more is in store for you</item>
+        <item>VITHack is a 36-Hour hackathon spread over the course of 3 days. Participants are continually encouraged to network with industry professionals in this confluence of knowledge and ideas</item>
+    </string-array>
+
 </resources>

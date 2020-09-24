@@ -7,6 +7,7 @@ import com.benrostudios.vithackapp.ui.auth.userPhone.UserPhoneViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignInViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.userSignUp.UserSignUpViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.welcome.WelcomeViewModelFactory
+import com.benrostudios.vithackapp.ui.home.domain.DomainViewModelFactory
 import com.benrostudios.vithackapp.ui.home.faq.FaqViewModelFactory
 import com.benrostudios.vithackapp.ui.home.speakers.SpeakersViewModelFactory
 import com.benrostudios.vithackapp.ui.home.timeline.TimelineViewModelFactory
@@ -29,6 +30,7 @@ class VitHackApplication : Application(), KodeinAware {
         bind<UserOperationRepository>() with singleton { UserOperationRepositoryImpl() }
         bind<FaqRepository>() with singleton { FaqRepositoryImpl() }
         bind<SpeakersRepository>() with singleton { SpeakersRepositoryImpl() }
+        bind<DomainRepository>() with singleton { DomainRepositoryImpl() }
         bind() from provider { UserSignInViewModelFactory(instance()) }
         bind() from provider { TimelineViewModelFactory(instance()) }
         bind() from provider { SharedPrefUtils(instance()) }
@@ -38,6 +40,7 @@ class VitHackApplication : Application(), KodeinAware {
         bind() from provider { FaqViewModelFactory(instance()) }
         bind() from provider { SplashActivityViewModelFactory(instance()) }
         bind() from provider { SpeakersViewModelFactory(instance()) }
+        bind() from provider { DomainViewModelFactory(instance()) }
     }
 
 

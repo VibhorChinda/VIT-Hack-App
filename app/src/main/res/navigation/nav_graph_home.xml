@@ -22,8 +22,9 @@
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/problemStatement"
-        android:name="com.benrostudios.vithackapp.ui.home.problemStatement.ProblemStatement"
-        android:label="ProblemStatement" />
+        android:name="com.benrostudios.vithackapp.ui.home.domain.DomainFragment"
+        android:label="ProblemStatement"
+        tools:layout="@layout/domain_fragment" />
     <fragment
         android:id="@+id/faq"
         android:name="com.benrostudios.vithackapp.ui.home.faq.Faq"

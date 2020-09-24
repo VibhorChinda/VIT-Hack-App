@@ -76,17 +76,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
     private fun userListener() {
         viewModel.fetchedUser.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                Glide.with(this)
-                    .load(
-                        AvatarGenerator.avatarImage(
-                            requireActivity(),
-                            200,
-                            AvatarConstants.CIRCLE,
-                            it.name,
-                            AvatarConstants.COLOR400
-                        )
-                    )
-                    .into(user_profile_photo)
+                profile_initials_text.text = intialExtractor(it.name)
                 user_full_name_profile_screen.text = it.name
                 user_email_address_profile_screen.text = it.mail
                 user_institute_name_profile_screen.text = it.collegeName
@@ -95,4 +85,14 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
             }
         })
     }
+
+    private fun intialExtractor(name: String): String{
+        val names = name.split(" ")
+        var initials = ""
+        names.forEach {
+            initials += it[0].toUpperCase()
+        }
+        return initials
+    }
+
 }

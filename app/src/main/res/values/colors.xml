@@ -6,6 +6,8 @@
     <color name="blue_accent">#0071CD</color>
     <color name="google_btn_color">#4C8BF5</color>
     <color name="yellow_accent">#ffbd3b</color>
+    <color name="domain_button_color">#595959</color>
+    <color name="default_domain_card_color">#FFDAC1</color>
     <color name="red_accent">#ea3883</color>
     <color name="error_red">#d32f2f</color>
     <color name="success_green">#4caf50</color>
