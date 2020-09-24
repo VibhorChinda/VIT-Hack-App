@@ -30,7 +30,6 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private lateinit var viewModel: SplashActivityViewModel
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-
     private val SPLASH_TIME_OUT = 1000L
     override fun onCreate(savedInstanceState: Bundle?) {
         val uiMode = sharedPrefUtils.getUiMode()
