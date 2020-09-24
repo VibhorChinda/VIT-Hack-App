@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.adapters.DomainAdapter
 import com.benrostudios.vithackapp.ui.base.ScopedFragment
+import com.benrostudios.vithackapp.ui.home.domain.tracks.TracksBottomSheet
 import kotlinx.android.synthetic.main.domain_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -39,21 +40,32 @@ class DomainFragment : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(DomainViewModel::class.java)
-        domains_recycler_view.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.HORIZONTAL ,false)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DomainViewModel::class.java)
+        domains_recycler_view.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         fetchDomains()
         listenFetchedDomains()
     }
 
-    private fun listenFetchedDomains() = launch{
+    private fun listenFetchedDomains() = launch {
         viewModel.fetchedDomains.observe(viewLifecycleOwner, Observer {
-            if(it != null){
-                adapter = DomainAdapter(it)
+            if (it != null) {
+                adapter = DomainAdapter(it) { position ->
+                    val tracksBottomSheet = TracksBottomSheet()
+                    val bundle = Bundle()
+                    bundle.putSerializable("domains_list", it[position])
+                    tracksBottomSheet.arguments = bundle
+                    tracksBottomSheet.show(
+                        requireActivity().supportFragmentManager,
+                        tracksBottomSheet.tag
+                    )
+                }
                 domains_recycler_view.adapter = adapter
             }
         })
     }
-    private fun fetchDomains() = launch{
+
+    private fun fetchDomains() = launch {
         viewModel.fetchDomains()
     }
 

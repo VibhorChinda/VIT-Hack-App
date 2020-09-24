@@ -16,7 +16,7 @@ import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.domain_item.view.*
 
-class DomainAdapter(private val domainsList: List<Domain>) :
+class DomainAdapter(private val domainsList: List<Domain> , private val onClick: (Int) -> Unit) :
     RecyclerView.Adapter<DomainAdapter.DomainViewHolder>() {
 
     private lateinit var mContext: Context
@@ -46,6 +46,8 @@ class DomainAdapter(private val domainsList: List<Domain>) :
             .placeholder(mContext.imagePlaceholder())
             .into(holder.image)
         holder.container.setCardBackgroundColor(domainsList[position].colour.toColorInt())
-
+        holder.showMore.setOnClickListener {
+            onClick(position)
+        }
     }
 }

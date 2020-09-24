@@ -114,6 +114,8 @@
 
     //Domain
     <string name="show_more">Show More</string>
+    <string name="problem_statement">Problem Statement</string>
+    <string name="problem_statement_desc">This is a placeholder text , there will be some content here</string>
 
     //On Boarding
     <string name="welcome_to_text">Welcome to</string>
