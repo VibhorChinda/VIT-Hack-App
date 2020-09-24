@@ -6,39 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".ui.splash.SplashActivity">
 
-    <TextView
-        android:id="@+id/textView44"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SPLASH"
-        android:textSize="36sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <ProgressBar
-        android:visibility="invisible"
         android:id="@+id/splash_progress"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView44"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_splash" />
 
     <TextView
         android:id="@+id/user_info_fetcher_display"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/fetching_user_info"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/splash_progress"
         app:layout_constraintStart_toStartOf="@+id/splash_progress"
         app:layout_constraintTop_toBottomOf="@+id/splash_progress" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

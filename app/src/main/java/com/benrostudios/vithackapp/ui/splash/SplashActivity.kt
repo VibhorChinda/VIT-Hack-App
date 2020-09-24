@@ -16,9 +16,14 @@ import com.benrostudios.vithackapp.ui.onBoarding.OnBoardingActivity
 import com.benrostudios.vithackapp.utils.EventObserver
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.crashlytics.internal.analytics.CrashlyticsOriginAnalyticsEventLogger
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.Kodein
@@ -33,14 +38,18 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private lateinit var viewModel: SplashActivityViewModel
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    private val SPLASH_TIME_OUT = 1000L
+    private val SPLASH_TIME_OUT = 3000L
     override fun onCreate(savedInstanceState: Bundle?) {
-        if(sharedPrefUtils.getFirstTimeOpen()){
+        if (sharedPrefUtils.getFirstTimeOpen()) {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> {sharedPrefUtils.setUiMode(true)}
-                Configuration.UI_MODE_NIGHT_YES -> {sharedPrefUtils.setUiMode(false)}
+                Configuration.UI_MODE_NIGHT_NO -> {
+                    sharedPrefUtils.setUiMode(true)
+                }
+                Configuration.UI_MODE_NIGHT_YES -> {
+                    sharedPrefUtils.setUiMode(false)
+                }
             }
-        }else{
+        } else {
             val uiMode = sharedPrefUtils.getUiMode()
             if (uiMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -48,7 +57,6 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
-
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
@@ -56,13 +64,41 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initialize() {
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         setContentView(R.layout.activity_splash)
+        val splashImageView = iv_splash
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.vithack_animation)
+            .listener(object : RequestListener<GifDrawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onResourceReady(
+                    resource: GifDrawable?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    if (resource is GifDrawable) {
+                        resource.setLoopCount(1)
+                    }
+                    return false;
+                }
+
+            })
+            .into(splashImageView)
         if (sharedPrefUtils.getFirstTimeOpen()) {
             Handler().postDelayed(
                 {
