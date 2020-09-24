@@ -1,6 +1,7 @@
 package com.benrostudios.vithackapp
 
 import android.app.Application
+import android.util.Log
 import com.benrostudios.vithackapp.data.repository.*
 import com.benrostudios.vithackapp.ui.auth.userPhone.UserPhoneViewModelFactory
 import com.benrostudios.vithackapp.ui.auth.userSignIn.UserSignInViewModelFactory
@@ -12,6 +13,11 @@ import com.benrostudios.vithackapp.ui.home.speakers.SpeakersViewModelFactory
 import com.benrostudios.vithackapp.ui.home.timeline.TimelineViewModelFactory
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.ktx.Firebase
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -40,6 +46,26 @@ class VitHackApplication : Application(), KodeinAware {
         bind() from provider { SplashActivityViewModelFactory(instance()) }
         bind() from provider { SpeakersViewModelFactory(instance()) }
         bind() from provider { DomainViewModelFactory(instance()) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        fetchFirebaseToken()
+    }
+
+    fun fetchFirebaseToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+                val firebaseToken = task.result!!.token
+                val uid = FirebaseAuth.getInstance().uid
+                Firebase.database.getReference("/users/$uid").child("token").setValue(firebaseToken)
+                    .addOnFailureListener {
+                        Log.d("tokenUpdate", "$it")
+                    }
+            })
     }
 
 
