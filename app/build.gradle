@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 30
@@ -87,6 +89,10 @@ dependencies {
 
     //Lottie
     implementation 'com.airbnb.android:lottie:3.4.1'
+
+    //Crashalytics
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
 
 
 

@@ -18,6 +18,7 @@ import com.benrostudios.vithackapp.utils.SharedPrefUtils
 import com.benrostudios.vithackapp.utils.show
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.internal.analytics.CrashlyticsOriginAnalyticsEventLogger
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.Kodein
@@ -52,7 +53,6 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SplashActivityViewModel::class.java)
         initialize()
-
     }
 
     private fun initialize() {
