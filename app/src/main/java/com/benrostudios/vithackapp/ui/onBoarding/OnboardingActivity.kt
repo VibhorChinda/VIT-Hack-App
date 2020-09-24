@@ -1,5 +1,6 @@
 package com.benrostudios.vithackapp.ui.onBoarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.ui.auth.AuthActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
@@ -41,7 +43,8 @@ class OnboardingActivity : AppCompatActivity() {
         handler = Handler(Looper.getMainLooper())
         viewPager.isUserInputEnabled = false
         btn_skip.setOnClickListener {
-            //TODO: Decide further flow
+            startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
     }
 
