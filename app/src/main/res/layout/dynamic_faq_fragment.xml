@@ -53,6 +53,7 @@
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/blue_accent"
         android:text="@string/ask_ques"
+        android:textColor="#FFF"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
