@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:elevation="16dp"
+        app:elevation="16dp"
         android:layout_marginBottom="16dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/about_us_bottom_fragment_container"
+    android:background="@color/about_us_background"
+    android:backgroundTint="@color/about_us_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -11,20 +13,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/about_us_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView50">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/team_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:background="@color/about_us_background"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView50"
+            app:layout_constraintVertical_bias="1.0"
+            app:spanCount="2"
+            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/about_us_item" />
 
         <TextView
@@ -61,6 +65,7 @@
             android:textSize="26sp"
             app:layout_constraintStart_toStartOf="@+id/textView49"
             app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
