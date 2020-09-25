@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.TimeLine
+import com.benrostudios.vithackapp.utils.hide
+import com.benrostudios.vithackapp.utils.show
 import kotlinx.android.synthetic.main.timeline_list_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,10 +37,10 @@ class TimelineAdapter(private val timelineData: List<TimeLine>): RecyclerView.Ad
         holder.sessionTitle.text = timelineData[position].title
         holder.sessionTime.text = dateFormatter.format(Date(timelineData[position].startUnix))
 
-        if(System.currentTimeMillis() > timelineData[position].endUnix) {
-            holder.sessionIndicator.visibility = View.VISIBLE
+        if(System.currentTimeMillis()/1000 > timelineData[position].endUnix) {
+            holder.sessionIndicator.show()
         } else {
-            holder.sessionIndicator.visibility = View.INVISIBLE
+            holder.sessionIndicator.hide()
         }
     }
 
