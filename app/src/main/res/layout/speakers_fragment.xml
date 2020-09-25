@@ -39,7 +39,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/lato_bold"
-            android:text="@string/speakers"
+            android:text="@string/collabs"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

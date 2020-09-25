@@ -7,7 +7,7 @@
     <item
         android:id="@+id/speakers"
         android:icon="@drawable/ic_speakers"
-        android:title="@string/speakers" />
+        android:title="@string/collabs" />
     <item
         android:id="@+id/problemStatement"
         android:icon="@drawable/ic_domain"

@@ -162,14 +162,13 @@
                     android:id="@+id/profiile_logout_button"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="@color/blue_accent"
                     android:text="@string/logout_button"
                     android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch"
-                    app:layout_constraintVertical_bias="0.42000002" />
+                    app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/dark_mode_switch"
@@ -202,7 +201,50 @@
                     android:visibility="gone"
                     app:layout_constraintGuide_begin="60dp" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profiile_logout_button"
+                    app:layout_constraintVertical_bias="0.4">
+
+                    <ImageView
+                        android:id="@+id/iv_linkedin"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/linkedin" />
+
+                    <ImageView
+                        android:id="@+id/iv_instagram"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/instagram" />
+
+                    <ImageView
+                        android:id="@+id/iv_twitter"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/twitter" />
+
+                    <ImageView
+                        android:id="@+id/iv_facebook"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/facebook" />
+
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView

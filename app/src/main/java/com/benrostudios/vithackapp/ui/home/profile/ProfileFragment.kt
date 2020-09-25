@@ -2,6 +2,7 @@ package com.benrostudios.vithackapp.ui.home.profile
 
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.benrostudios.vithackapp.ui.splash.SplashActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
-import com.benrostudios.vithackapp.utils.hide
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.coroutines.launch
@@ -35,6 +35,10 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
 
     companion object {
         fun newInstance() = ProfileFragment()
+        const val FACEBOOK_URL = "https://www.facebook.com/vithack19/"
+        const val INSTA_URL = "https://www.instagram.com/vithack2020/"
+        const val LINKEDIN_URL = "https://www.linkedin.com/company/hackvit/"
+        const val TWITTER_URL = "https://twitter.com/VITHack2020/"
     }
 
     private lateinit var viewModel: SplashActivityViewModel
@@ -68,7 +72,18 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         dark_mode_switch.setOnClickListener {
             (activity as HomeActivity).switchUiMode()
         }
-
+        iv_facebook.setOnClickListener {
+            launchUri(FACEBOOK_URL)
+        }
+        iv_instagram.setOnClickListener {
+            launchUri(INSTA_URL)
+        }
+        iv_linkedin.setOnClickListener {
+            launchUri(LINKEDIN_URL)
+        }
+        iv_twitter.setOnClickListener {
+            launchUri(TWITTER_URL)
+        }
     }
 
     private fun fetchUser() = launch {
@@ -97,6 +112,11 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
             initials += it[0].toUpperCase()
         }
         return initials
+    }
+
+    private fun launchUri(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
 }
