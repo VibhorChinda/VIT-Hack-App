@@ -59,6 +59,7 @@
         android:insetTop="0dp"
         android:visibility="visible"
         android:insetBottom="0dp"
+        android:textColor="@android:color/white"
         android:text="Join Discord"
         android:textAllCaps="false"
         app:cornerRadius="36dp"
