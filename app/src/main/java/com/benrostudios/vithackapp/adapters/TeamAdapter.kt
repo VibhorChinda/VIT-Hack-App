@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Developer
 import com.benrostudios.vithackapp.utils.imagePlaceholder
+import com.benrostudios.vithackapp.utils.shortToaster
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -70,12 +72,12 @@ class TeamAdapter(private val devData: List<Developer>) :
         }
         if (devData[position].instagramLink.isBlank()) {
             holder.email.setOnClickListener {
-                openLink(devData[position].linkedInLink)
+                openEmail(devData[position].emailId)
             }
         } else {
             holder.email.setImageDrawable(mContext.getDrawable(R.drawable.ic_instagram_filled))
             holder.email.setOnClickListener {
-                openLink(devData[position].instagramLink)
+                openEmail(devData[position].emailId)
             }
         }
         holder.linkedIn.setOnClickListener {
@@ -87,5 +89,17 @@ class TeamAdapter(private val devData: List<Developer>) :
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(link)
         mContext.startActivity(intent)
+    }
+
+    private fun openEmail(emailId: String){
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse("mailto:")
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailId))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,"VIT Hack 2020 Feedback")
+        if (emailIntent.resolveActivity(mContext.packageManager) != null) {
+            mContext.startActivity(emailIntent)
+        }else{
+           mContext.shortToaster("No Email apps found!")
+        }
     }
 }

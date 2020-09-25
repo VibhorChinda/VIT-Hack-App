@@ -7,5 +7,6 @@ data class Developer(
     val linkedInLink:String,
     val dribbleLink:String,
     val emailId: String,
-    val instagramLink:String
+    val instagramLink:String,
+    val imageName: String
 )
