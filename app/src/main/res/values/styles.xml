@@ -11,6 +11,7 @@
         <item name="android:windowBackground">@color/window_background</item>
         <item name="searchViewStyle">@style/SearchViewStyle</item>
         <item name="cardViewStyle">@style/CardViewCustomStyle</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="CardViewCustomStyle" parent="Widget.MaterialComponents.CardView">
@@ -33,5 +34,12 @@
         <item name="queryHint">@string/search_hint</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottom_sheet_main</item>
+    </style>
 
 </resources>

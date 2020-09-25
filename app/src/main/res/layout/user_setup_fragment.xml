@@ -79,6 +79,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
+        android:text="Vellore Institute of Technology"
         android:inputType="textPersonName"
         android:hint="@string/enter_institution_name"
         app:layout_constraintEnd_toEndOf="parent"

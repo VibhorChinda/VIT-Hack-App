@@ -97,7 +97,7 @@ class Speakers : ScopedFragment(), KodeinAware {
         viewModel.fetchSpeakers()
         viewModel.speakersList.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
-                speakersAdapter = SpeakerAdapter(it)
+                speakersAdapter = SpeakerAdapter(it.asReversed())
                 speakers_recyclerView.adapter = speakersAdapter
             }
         })
