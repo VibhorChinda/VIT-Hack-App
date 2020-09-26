@@ -30,6 +30,7 @@ class HomeActivity : BaseActivity(), KodeinAware {
     private val sharedPrefUtils: SharedPrefUtils by instance()
     private var initOpen: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPrefUtils.setFirstTimeOpen(false)
         val uiMode = sharedPrefUtils.getUiMode()
         if (!uiMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

@@ -117,7 +117,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         if (sharedPrefUtils.getFirstTimeOpen()) {
             Handler().postDelayed(
                 {
-                    sharedPrefUtils.setFirstTimeOpen(false)
+                    //sharedPrefUtils.setFirstTimeOpen(false)
                     startActivity(Intent(this, OnBoardingActivity::class.java))
                     finish()
                 }, SPLASH_TIME_OUT
@@ -172,7 +172,6 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                 firebaseAuth.signOut()
                 Intent(this, AuthActivity::class.java)
             }
-        sharedPrefUtils.setFirstTimeOpen(false)
         startActivity(intent)
         finish()
     }
