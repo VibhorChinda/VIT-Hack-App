@@ -41,8 +41,8 @@ class DomainFragment : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DomainViewModel::class.java)
-        domains_recycler_view.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+//        domains_recycler_view.layoutManager =
+//            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         fetchDomains()
         listenFetchedDomains()
     }
@@ -60,7 +60,7 @@ class DomainFragment : ScopedFragment(), KodeinAware {
                         tracksBottomSheet.tag
                     )
                 }
-                domains_recycler_view.adapter = adapter
+                card_slider_domains.adapter = adapter
             }
         })
     }

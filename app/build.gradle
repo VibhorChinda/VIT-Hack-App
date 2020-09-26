@@ -94,6 +94,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
 
+    //Card Carousel
+    implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+
 
 
 }

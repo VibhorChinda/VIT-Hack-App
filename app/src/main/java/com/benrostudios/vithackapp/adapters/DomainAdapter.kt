@@ -14,10 +14,11 @@ import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.data.models.Domain
 import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
+import com.github.islamkhsh.CardSliderAdapter
 import kotlinx.android.synthetic.main.domain_item.view.*
 
 class DomainAdapter(private val domainsList: List<Domain> , private val onClick: (Int) -> Unit) :
-    RecyclerView.Adapter<DomainAdapter.DomainViewHolder>() {
+    CardSliderAdapter<DomainAdapter.DomainViewHolder>() {
 
     private lateinit var mContext: Context
 
@@ -38,7 +39,7 @@ class DomainAdapter(private val domainsList: List<Domain> , private val onClick:
 
     override fun getItemCount(): Int = domainsList.size
 
-    override fun onBindViewHolder(holder: DomainViewHolder, position: Int) {
+    override fun bindVH(holder: DomainViewHolder, position: Int) {
         holder.title.text = domainsList[position].domain
         holder.shortDesc.text = domainsList[position].description
         Glide.with(mContext)
