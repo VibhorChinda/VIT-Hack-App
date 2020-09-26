@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/about_us_bottom_fragment_container"
-    android:background="@color/about_us_background"
-    android:backgroundTint="@color/about_us_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/about_us_background"
+    android:backgroundTint="@color/about_us_background"
     android:fillViewport="true"
     tools:context=".ui.home.aboutus.AboutUs">
 
@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/about_us_background"
+        android:background="@color/about_us_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView50">
 
@@ -23,12 +25,12 @@
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:background="@color/about_us_background"
+            android:backgroundTint="@color/about_us_background"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView50"
             app:layout_constraintVertical_bias="1.0"
             app:spanCount="2"
-            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/about_us_item" />
 
         <TextView
