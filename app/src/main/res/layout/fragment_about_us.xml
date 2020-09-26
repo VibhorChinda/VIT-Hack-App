@@ -5,8 +5,6 @@
     android:id="@+id/about_us_bottom_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/about_us_background"
-    android:backgroundTint="@color/about_us_background"
     android:fillViewport="true"
     tools:context=".ui.home.aboutus.AboutUs">
 
@@ -14,8 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/about_us_background"
-        android:background="@color/about_us_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView50">
 
@@ -24,13 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:background="@color/about_us_background"
-            android:backgroundTint="@color/about_us_background"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView50"
-            app:layout_constraintVertical_bias="1.0"
             app:spanCount="2"
+            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/about_us_item" />
 
         <TextView
@@ -67,6 +60,18 @@
             android:textSize="26sp"
             app:layout_constraintStart_toStartOf="@+id/textView49"
             app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/special_thanks"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/team_recyclerView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
