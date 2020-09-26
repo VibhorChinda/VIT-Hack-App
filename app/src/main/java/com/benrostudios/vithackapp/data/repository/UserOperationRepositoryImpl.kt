@@ -70,7 +70,7 @@ class UserOperationRepositoryImpl : UserOperationRepository {
         get() = _fetchedUser
 
     override fun updateFcmToken(token: String, uid: String) {
-        Firebase.database.getReference("/users/$uid").child("token").setValue(token)
+        Firebase.database.getReference("/users/$uid").child("fcmToken").setValue(token)
             .addOnFailureListener {
                 Log.d("tokenUpdate", "$it")
             }

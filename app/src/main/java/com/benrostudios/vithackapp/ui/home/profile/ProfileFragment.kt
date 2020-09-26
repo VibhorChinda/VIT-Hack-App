@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,12 +107,15 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun intialExtractor(name: String): String{
-        val names = name.split(" ")
-        var initials = ""
-        names.forEach {
-            initials += it[0].toUpperCase()
+        val name2 = name.split(' ')
+            .mapNotNull {
+                it.firstOrNull()?.toString()
+            }
+        return if(name2.size >=2){
+            name2[0]+name2[1]
+        }else{
+            name2[0]
         }
-        return initials
     }
 
     private fun launchUri(url: String) {
