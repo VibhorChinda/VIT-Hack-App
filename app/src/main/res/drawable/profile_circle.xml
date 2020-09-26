@@ -11,5 +11,5 @@
 
     <stroke
         android:width="4dp"
-        android:color="@color/alter_primary_color" />
+        android:color="@color/card_background_color" />
 </shape>
