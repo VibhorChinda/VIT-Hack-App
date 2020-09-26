@@ -48,7 +48,7 @@ class TeamAdapter(private val devData: List<Developer>) :
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val storageReference: StorageReference = FirebaseStorage.getInstance().reference
-        val devPictureTest = storageReference.child("Testing/speaker1.png")
+        val devPictureTest = storageReference.child("developers/${devData[position].imageName}.jpeg")
         val options: RequestOptions = RequestOptions()
             .circleCrop()
 
