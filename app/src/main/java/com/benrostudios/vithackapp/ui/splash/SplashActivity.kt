@@ -5,9 +5,11 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.vithackapp.R
 import com.benrostudios.vithackapp.ui.auth.AuthActivity
@@ -42,6 +44,8 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
     private val SPLASH_TIME_OUT = 3000L
     override fun onCreate(savedInstanceState: Bundle?) {
         if (sharedPrefUtils.getFirstTimeOpen()) {
+            Log.d("test","fenlo")
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_NO -> {
                     sharedPrefUtils.setUiMode(true)
@@ -54,6 +58,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
                 }
             }
         } else {
+            Log.d("test","henlo")
             val uiMode = sharedPrefUtils.getUiMode()
             if (uiMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
