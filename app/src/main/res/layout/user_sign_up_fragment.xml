@@ -92,7 +92,7 @@
         android:paddingBottom="20dp"
         android:text="@string/sign_up"
         android:textColor="#FFF"
-        android:visibility=""
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/password_input"
         app:layout_constraintHorizontal_bias="0.0"
