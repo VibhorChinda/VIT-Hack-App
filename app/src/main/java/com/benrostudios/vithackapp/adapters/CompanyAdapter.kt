@@ -1,6 +1,8 @@
 package com.benrostudios.vithackapp.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,12 +29,20 @@ class CompanyAdapter(private val companyItems: List<Company>) :
 
 
     override fun onBindViewHolder(holder: CompanyViewHolder, position: Int) {
-        val storageReference: StorageReference = FirebaseStorage.getInstance().reference
         Glide.with(mContext)
             .load(companyItems[position].logoUrl)
             .placeholder(mContext.imagePlaceholder())
             .into(holder.companyImage)
+        holder.companyImage.setOnClickListener {
+            openLink(companyItems[position].pageUrl)
+        }
 
+    }
+
+    private fun openLink(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(link)
+        mContext.startActivity(intent)
     }
 
     override fun getItemCount(): Int = companyItems.size
