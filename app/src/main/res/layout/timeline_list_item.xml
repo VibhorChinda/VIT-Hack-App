@@ -43,6 +43,7 @@
         android:id="@+id/timeline_date_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:background="@color/alter_primary_color"
         android:fontFamily="@font/lato_bold"
         android:paddingTop="8dp"
@@ -50,8 +51,8 @@
         android:text="28 September 2020"
         android:textColor="@color/blue_accent"
         android:textSize="18sp"
-        android:visibility="visible"
 
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/timeline_session_time"
         app:layout_constraintTop_toBottomOf="@+id/timeline_session_description" />
