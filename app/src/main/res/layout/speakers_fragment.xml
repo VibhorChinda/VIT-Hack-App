@@ -45,19 +45,44 @@ tools:context=".ui.home.speakers.Speakers">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/speakers_recyclerView"
+    <TextView
+        android:id="@+id/textView30"
         android:layout_width="0dp"
-        tools:listitem="@layout/speaker_item"
-        android:layout_height="300dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/collab_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/speaker"
+        android:textColor="@color/blue_accent"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/speakers_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31"
+        tools:listitem="@layout/speaker_item" />
 
     <TextView
         android:id="@+id/textView46"
@@ -89,7 +114,7 @@ tools:context=".ui.home.speakers.Speakers">
         android:id="@+id/textView47"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/sponsor"
         android:textColor="@color/blue_accent"
         android:textSize="24sp"

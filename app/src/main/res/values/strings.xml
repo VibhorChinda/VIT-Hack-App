@@ -100,6 +100,7 @@
     <string name="about_us">About Us</string>
     <string name="join_now">Join Now</string>
     <string name="team">Team</string>
+    <string name="collab_label">Spend some quality time with your inspirations!</string>
 
     //BottomNavHelpers
     <string name="timeline">Timeline</string>
@@ -113,20 +114,24 @@
     <string name="notification_channel_disp">Updates</string>
 
     //Domain
+    <string name="domain_label">From Agriculture to Fintech, choose your house!</string>
     <string name="show_more">Show More</string>
     <string name="problem_statement">Problem Statement</string>
     <string name="problem_statement_desc">This is a placeholder text , there will be some content here</string>
-
     <string name="special_thanks">Special Thanks to www.getillustrations.com</string>
+
+    //About Us
+    <string name="about_us_label">VIT Hack aims for participants to contribute their ideas as solutions to real-world problems. Problems are driven towards social causes! We wish you bring your best ideas and your willingness.</string>
 
     //On Boarding
     <string name="welcome_to_text">Welcome to</string>
     <string name="vit_hack">VIT HACK</string>
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="speaker">Speakers</string>
     <string-array name="on_boarding_array">
-        <item>The hackathon will be focusing on the feasibility, application, resourcefulness and fundability of each project idea presented by the participant</item>
-        <item>Real-world problem statement aimed towards challenging your abilities and tons more is in store for you</item>
-        <item>VITHack is a 36-Hour hackathon spread over the course of 3 days. Participants are continually encouraged to network with industry professionals in this confluence of knowledge and ideas</item>
+        <item>VIT Hack is one of the best Pan-Indian hackathons where participants creatively use cutting edge technology to solve societal problems, and compete for exciting prizes.</item>
+        <item>Get a chance to learn, ideate and grow. Pitch your wildest ideas to real-life investors and win the opportunity of getting invested, internships and many more!</item>
+        <item>From Mentor talks, webinars, mentorships, project collabs, workshops, forums to discuss and many more…VIT Hack being a major hackathon, compete at a high level and gain tremendous exposure.</item>
     </string-array>
 
 </resources>
