@@ -34,9 +34,27 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/blue_vertical_line_drawable" />
+
+    <TextView
+        android:id="@+id/timeline_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/alter_primary_color"
+        android:fontFamily="@font/lato_bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="28 September 2020"
+        android:textColor="@color/blue_accent"
+        android:textSize="18sp"
+        android:visibility="visible"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/timeline_session_time"
+        app:layout_constraintTop_toBottomOf="@+id/timeline_session_description" />
 
     <TextView
         android:id="@+id/timeline_session_time"
@@ -93,4 +111,11 @@
         app:layout_constraintStart_toEndOf="@+id/timeline_session_title"
         app:layout_constraintTop_toTopOf="@+id/timeline_session_title"
         app:srcCompat="@drawable/ic_green_tick" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.56" />
 </androidx.constraintlayout.widget.ConstraintLayout>
