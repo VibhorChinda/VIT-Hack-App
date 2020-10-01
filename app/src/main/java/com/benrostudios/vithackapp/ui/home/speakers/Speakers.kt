@@ -2,6 +2,7 @@ package com.benrostudios.vithackapp.ui.home.speakers
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -76,21 +77,29 @@ class Speakers : ScopedFragment(), KodeinAware {
         fetchSpeakers()
     }
 
-    private fun inflateCollaborators() {
-        for (i in 1..3) {
-            collaboratorsList.add("Testing/collaborator$i.png")
-        }
-        collaboratorsAdapter = CompanyAdapter(collaboratorsList)
-        collborators_recyclerView.adapter = collaboratorsAdapter
+    private fun inflateCollaborators() = launch {
+        viewModel.fetchCollaborators()
+        viewModel.collaboratorsList.observe(viewLifecycleOwner, Observer {
+            Log.d("lol","Collab $it")
+            if (!it.isNullOrEmpty()) {
+                collaboratorsAdapter = CompanyAdapter(it)
+                collborators_recyclerView.adapter = collaboratorsAdapter
+            }
+        })
+
 
     }
 
-    private fun inflateSponsors() {
-        for (i in 1..3) {
-            sponsorsList.add("Testing/sponsor$i.png")
-        }
-        sponsorsAdapter = CompanyAdapter(sponsorsList)
-        sponsor_recycler.adapter = sponsorsAdapter
+    private fun inflateSponsors() = launch {
+        viewModel.fetchSponsors()
+        viewModel.sponsorList.observe(viewLifecycleOwner, Observer {
+            Log.d("lol","$it")
+            if (!it.isNullOrEmpty()) {
+                sponsorsAdapter = CompanyAdapter(it)
+                sponsor_recycler.adapter = sponsorsAdapter
+            }
+        })
+
     }
 
     private fun fetchSpeakers() = launch {

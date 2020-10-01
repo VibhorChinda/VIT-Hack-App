@@ -10,15 +10,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/faq_recyclerView"
         android:layout_width="0dp"
-        android:paddingBottom="16dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_container"
-        tools:listitem="@layout/faq_item"/>
+        tools:listitem="@layout/faq_item" />
 
     <TextView
         android:id="@+id/textView6"

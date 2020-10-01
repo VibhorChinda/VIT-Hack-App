@@ -7,7 +7,21 @@ class SpeakersViewModel(private val speakersRepository: SpeakersRepository) : Vi
     val speakersList
         get() = speakersRepository.speakersList
 
+    val sponsorList
+        get() = speakersRepository.sponsors
+
+    val collaboratorsList
+        get() = speakersRepository.collaborators
+
     suspend fun fetchSpeakers() {
         speakersRepository.fetchSpeakers()
+    }
+
+    suspend fun fetchSponsors() {
+        speakersRepository.fetchSponsors()
+    }
+
+    suspend fun fetchCollaborators() {
+        speakersRepository.fetchCollaborators()
     }
 }

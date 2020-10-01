@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.vithackapp.R
+import com.benrostudios.vithackapp.data.models.Company
 import com.benrostudios.vithackapp.utils.imagePlaceholder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -14,7 +15,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.company_item.view.*
 
-class CompanyAdapter(private val companyItems: List<String>) :
+class CompanyAdapter(private val companyItems: List<Company>) :
     RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder>() {
 
     private lateinit var mContext: Context
@@ -27,9 +28,8 @@ class CompanyAdapter(private val companyItems: List<String>) :
 
     override fun onBindViewHolder(holder: CompanyViewHolder, position: Int) {
         val storageReference: StorageReference = FirebaseStorage.getInstance().reference
-        val companyLogo = storageReference.child(companyItems[position])
         Glide.with(mContext)
-            .load(companyLogo)
+            .load(companyItems[position].logoUrl)
             .placeholder(mContext.imagePlaceholder())
             .into(holder.companyImage)
 
