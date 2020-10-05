@@ -38,6 +38,11 @@ class TimelineAdapter(private val timelineData: List<TimeLine>) :
     }
 
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
+        if (position != 0) {
+            holder.startText.visibility = View.GONE
+        } else {
+            holder.startText.visibility = View.VISIBLE
+        }
         holder.sessionDescription.text = timelineData[position].subtitle
         holder.sessionTitle.text = timelineData[position].title
         holder.sessionTime.text =
@@ -72,5 +77,6 @@ class TimelineAdapter(private val timelineData: List<TimeLine>) :
         val sessionDescription: TextView = view.timeline_session_description
         val sessionIndicator: ImageView = view.timeline_session_completed_indicator
         val dateHeader: TextView = view.timeline_date_view
+        val startText: TextView = view.tv_start_label
     }
 }

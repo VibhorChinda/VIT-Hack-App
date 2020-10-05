@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\mailt\\StudioProjects\\VIT-Hack-App\\vithack.jks')
+            storeFile file('C:\\Users\\mailt\\StudioProjects\\vithack.jks')
             storePassword 'vithack2020'
             keyAlias 'key0'
             keyPassword 'vithack2020'
