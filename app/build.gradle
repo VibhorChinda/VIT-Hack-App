@@ -7,6 +7,14 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\mailt\\StudioProjects\\VIT-Hack-App\\vithack.jks')
+            storePassword 'vithack2020'
+            keyAlias 'key0'
+            keyPassword 'vithack2020'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
@@ -20,12 +28,13 @@ android {
 
     defaultConfig {
         applicationId "com.benrostudios.vithackapp"
-        minSdkVersion 25
+        minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
