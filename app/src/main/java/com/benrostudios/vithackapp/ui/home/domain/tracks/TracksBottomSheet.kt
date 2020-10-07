@@ -36,7 +36,7 @@ class TracksBottomSheet : BottomSheetDialogFragment() {
 
         domain = arguments?.getSerializable("domains_list") as Domain
         tracks_recycler_view.layoutManager = LinearLayoutManager(requireActivity())
-        adapter = TracksAdapter(domain.problemStatements, domain.abbreviation)
+        adapter = TracksAdapter(domain.zproblemStatements, domain.abbreviation)
         tracks_recycler_view.adapter = adapter
     }
 }

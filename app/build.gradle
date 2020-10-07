@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\mailt\\StudioProjects\\VIT-Hack-App\\vithack.jks')
+            storeFile file('C:\\Users\\mailt\\StudioProjects\\vithack.jks')
             storePassword 'vithack2020'
             keyAlias 'key0'
             keyPassword 'vithack2020'
@@ -30,8 +30,8 @@ android {
         applicationId "com.benrostudios.vithackapp"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.1"
+        versionCode 7
+        versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -105,7 +105,6 @@ dependencies {
 
     //Card Carousel
     implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
-
 
 
 }

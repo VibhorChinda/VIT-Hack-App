@@ -10,5 +10,6 @@ data class Domain(
     var domain: String = "", // Healthcare
     var icon: String = "", // https://firebasestorage.googleapis.com/v0/b/project-vithack.appspot.com/o/domains%2Fheathcare.png?alt=media&token=3d2a4d9e-08f8-4ab6-ba95-817d4e899ce8
     var problemStatements: List<String> = emptyList(),
+    var zproblemStatements: List<String> = emptyList(),
     var abbreviation: String = ""
 ): Serializable

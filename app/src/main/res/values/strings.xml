@@ -128,6 +128,7 @@
     <string name="vit_hack">VIT HACK</string>
     <string name="placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="speaker">Speakers</string>
+    <string name="download_ps">Download</string>
     <string-array name="on_boarding_array">
         <item>VIT Hack is one of the best Pan-Indian hackathons where participants creatively use cutting edge technology to solve societal problems, and compete for exciting prizes.</item>
         <item>Get a chance to learn, ideate and grow. Pitch your wildest ideas to real-life investors and win the opportunity of getting invested, internships and many more!</item>
