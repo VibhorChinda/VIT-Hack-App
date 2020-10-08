@@ -47,10 +47,10 @@ class VitHackApplication : Application(), KodeinAware {
         bind() from provider { SpeakersViewModelFactory(instance()) }
         bind() from provider { DomainViewModelFactory(instance()) }
     }
+    private val sharedPrefUtils: SharedPrefUtils by instance()
 
     override fun onCreate() {
         super.onCreate()
-        val sharedPrefUtils = SharedPrefUtils(this@VitHackApplication)
         if (sharedPrefUtils.getHomeReached()) {
             fetchFirebaseToken()
         }

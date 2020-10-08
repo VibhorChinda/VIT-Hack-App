@@ -43,11 +43,11 @@ class SharedPrefUtils(
         sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, true)
 
     fun setHomeReached(truth: Boolean) {
-        editor.putBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, truth).commit()
+        editor.putBoolean(SHARED_PREFERENCE_REACHED_HOME, truth).commit()
     }
 
     fun getHomeReached(): Boolean =
-        sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, false)
+        sharedPreferences.getBoolean(SHARED_PREFERENCE_REACHED_HOME, false)
 
     fun setUiMode(truth: Boolean) {
         Log.d("setUI","$truth")
