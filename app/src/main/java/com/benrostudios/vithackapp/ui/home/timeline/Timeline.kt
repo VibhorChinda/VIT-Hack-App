@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 
 class Timeline : ScopedFragment(), KodeinAware {
 
@@ -54,10 +56,14 @@ class Timeline : ScopedFragment(), KodeinAware {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
                     // Scrolling up
-                    btn_join_discord.visibility = View.GONE
+                    if (btn_join_discord != null) {
+                        btn_join_discord.visibility = View.GONE
+                    }
                 } else {
                     // Scrolling down
-                    btn_join_discord.visibility = View.VISIBLE
+                    if (btn_join_discord != null) {
+                        btn_join_discord.visibility = View.VISIBLE
+                    }
                 }
             }
         })
@@ -75,7 +81,15 @@ class Timeline : ScopedFragment(), KodeinAware {
     }
 
     private fun launchDiscord() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/UX26KdG"))
-        startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/UX26KdG"))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                context,
+                "No Internet Browser found to handle request",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

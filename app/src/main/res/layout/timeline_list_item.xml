@@ -95,7 +95,7 @@
 
         <TextView
             android:id="@+id/timeline_session_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:fontFamily="@font/lato_regular"
@@ -103,9 +103,11 @@
             android:textColor="@color/blue_accent"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/timeline_session_completed_indicator"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8" />
+            app:layout_constraintVertical_bias="0.789" />
 
         <TextView
             android:id="@+id/timeline_session_description"
@@ -131,8 +133,6 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/timeline_session_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toEndOf="@+id/timeline_session_title"
             app:layout_constraintTop_toTopOf="@+id/timeline_session_title"
             app:srcCompat="@drawable/ic_green_tick" />
 

@@ -16,6 +16,7 @@ class SharedPrefUtils(
     }
 
     companion object {
+        const val SHARED_PREFERENCE_REACHED_HOME = "reachedHome"
         const val SHARED_PREFERENCE_FIRST_TIME_OPEN = "firstTimeOpen"
         const val SHARED_PREFERENCE_FCM_TOKEN = "fcmToken"
         const val SHARED_PREFERENCE_MAIL_ID = "email"
@@ -40,6 +41,13 @@ class SharedPrefUtils(
 
     fun getFirstTimeOpen(): Boolean =
         sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, true)
+
+    fun setHomeReached(truth: Boolean) {
+        editor.putBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, truth).commit()
+    }
+
+    fun getHomeReached(): Boolean =
+        sharedPreferences.getBoolean(SHARED_PREFERENCE_FIRST_TIME_OPEN, false)
 
     fun setUiMode(truth: Boolean) {
         Log.d("setUI","$truth")

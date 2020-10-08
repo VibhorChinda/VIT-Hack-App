@@ -18,13 +18,16 @@ import com.benrostudios.vithackapp.ui.splash.SplashActivity
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModel
 import com.benrostudios.vithackapp.ui.splash.SplashActivityViewModelFactory
 import com.benrostudios.vithackapp.utils.SharedPrefUtils
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 
 
 class ProfileFragment : ScopedFragment(), KodeinAware {
@@ -63,11 +66,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         fetchUser()
         userListener()
         profiile_logout_button.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            sharedPrefUtils.nuke()
-            val intent = Intent(requireActivity(), SplashActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            logout()
         }
         dark_mode_switch.isChecked = !sharedPrefUtils.getUiMode()
         dark_mode_switch.setOnClickListener {
@@ -85,6 +84,14 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         iv_twitter.setOnClickListener {
             launchUri(TWITTER_URL)
         }
+    }
+
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        sharedPrefUtils.nuke()
+        val intent = Intent(requireActivity(), SplashActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun fetchUser() = launch {
@@ -106,17 +113,23 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         })
     }
 
-    private fun intialExtractor(name: String): String{
-        val name2 = name.split(' ')
-            .mapNotNull {
-                it.firstOrNull()?.toString()
+    private fun intialExtractor(name: String): String {
+        try {
+            val name2 = name.split(' ')
+                .mapNotNull {
+                    it.firstOrNull()?.toString()
+                }
+            return if (name2.size >= 2) {
+                name2[0] + name2[1]
+            } else {
+                name2[0]
             }
-        return if(name2.size >=2){
-            name2[0]+name2[1]
-        }else{
-            name2[0]
+        } catch (e: Exception) {
+            FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().uid!!).setValue(null)
+            logout()
+            return "X"
         }
-    }
+     }
 
     private fun launchUri(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

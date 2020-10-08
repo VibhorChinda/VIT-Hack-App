@@ -21,12 +21,13 @@ class FaqRepositoryImpl : FaqRepository {
 
     override suspend fun fetchFaqs() {
         databaseReference = Firebase.database.getReference("/FAQs")
-        val faqFetcher = object : ValueEventListener{
+        val faqFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.d("DatabaseCancelled","FAQ Cancelled")
             }
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
+                    _faqList.clear()
                     for(x in snapshot.children){
                         val faqObj = x.getValue(FAQ::class.java)
                         faqObj?.let {
@@ -35,7 +36,7 @@ class FaqRepositoryImpl : FaqRepository {
                             }
                         }
                     }
-                    _fetchedFaqs.postValue(_faqList)
+                    _fetchedFaqs.postValue(_faqList.reversed())
                 }
             }
         }

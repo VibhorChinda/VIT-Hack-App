@@ -38,6 +38,14 @@ class TimelineAdapter(private val timelineData: List<TimeLine>) :
     }
 
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
+        val calendar = Calendar.getInstance()
+        val currentTime = calendar.timeInMillis
+        val endTime = timelineData[position].endUnix * 1000L
+        if (endTime < currentTime) {
+            holder.sessionIndicator.visibility = View.VISIBLE
+        } else {
+            holder.sessionIndicator.visibility = View.GONE
+        }
         if (position != 0) {
             holder.startText.visibility = View.GONE
         } else {
@@ -48,15 +56,19 @@ class TimelineAdapter(private val timelineData: List<TimeLine>) :
         holder.sessionTime.text =
             dateFormatter.format(Date(timelineData[position].startUnix * 1000L))
 
-        try{
-            if (!isSameDay(timelineData[position].startUnix, timelineData[position + 1].startUnix)) {
+        try {
+            if (!isSameDay(
+                    timelineData[position].startUnix,
+                    timelineData[position + 1].startUnix
+                )
+            ) {
                 holder.dateHeader.show()
-                holder.dateHeader.text = getDay(timelineData[position+1].startUnix)
-            }else{
+                holder.dateHeader.text = getDay(timelineData[position + 1].startUnix)
+            } else {
                 holder.dateHeader.hide()
             }
-        }catch(e: Exception){
-            Log.d("Timeline Adapter","Final Card Reached")
+        } catch (e: Exception) {
+            Log.d("Timeline Adapter", "Final Card Reached")
         }
     }
 

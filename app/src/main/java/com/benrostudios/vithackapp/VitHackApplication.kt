@@ -50,10 +50,13 @@ class VitHackApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        fetchFirebaseToken()
+        val sharedPrefUtils = SharedPrefUtils(this@VitHackApplication)
+        if (sharedPrefUtils.getHomeReached()) {
+            fetchFirebaseToken()
+        }
     }
 
-    fun fetchFirebaseToken() {
+    private fun fetchFirebaseToken() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {

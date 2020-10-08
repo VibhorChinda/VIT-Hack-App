@@ -26,13 +26,13 @@ class DomainRepositoryImpl : DomainRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    _domainsList.clear()
                     for (domain in snapshot.children) {
                         Log.d("repo","lolol ${snapshot.children}")
                         val currentDomain = domain.getValue(Domain::class.java)
                         currentDomain?.let {
                             if (!_domainsList.contains(it)) {
                                 _domainsList.add(it)
-
                             }
                         }
                     }
